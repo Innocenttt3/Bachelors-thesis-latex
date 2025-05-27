@@ -1,0 +1,67 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\@writefile{toc}{\contentsline {chapter}{Wstęp}{5}{chapter*.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {1}Wprowadzenie do systemu zarządzania siecią pogodową czujników}{6}{chapter.1}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {1.1}Koncepcja systemu Climatly oraz jego komponenty zewnętrzne}{6}{section.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {1.2}Rola oraz założenia projektowe warstwy backendowej}{7}{section.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {1.3}Wpływ zakładanych funkcjonalności na architekturę systemu}{9}{section.1.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1.1}{\ignorespaces Schemat modułów warstwy serwerowej systemu Climatly}}{10}{figure.caption.3}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:moduly---systemu}{{1.1}{10}{Schemat modułów warstwy serwerowej systemu Climatly}{figure.caption.3}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {2}Technologie i narzędzia wykorzystane w projekcie}{11}{chapter.2}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {2.1}Java jako język programowania dla aplikacji backendowych}{11}{section.2.1}\protected@file@percent }
+\citation{bib:guvi2023}
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}Spring Boot jako główny framework projektu}{14}{section.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.3}Systemy baz danych i ich integracja w koncepcji ORM}{14}{section.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.4}Integracja baz danych w modelu ORM}{16}{section.2.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.5}Dodatkowe narzędzia i biblioteki}{16}{section.2.5}\protected@file@percent }
+\@writefile{lolst}{\contentsline {lstfloat}{\numberline {2.1}{\ignorespaces Fragment pliku \texttt  {docker-compose.yaml} definiującego lokalne środowisko developerskie}}{18}{lstfloat.2.1}\protected@file@percent }
+\newlabel{lst:docker-compose}{{2.1}{18}{Fragment pliku \texttt {docker-compose.yaml} definiującego lokalne środowisko developerskie}{lstfloat.2.1}{}}
+\@writefile{lolst}{\contentsline {lstfloat}{\numberline {2.2}{\ignorespaces Fragment pliku inicjalizującego schemat bazy danych}}{19}{lstfloat.2.2}\protected@file@percent }
+\newlabel{lst:liquibase-init}{{2.2}{19}{Fragment pliku inicjalizującego schemat bazy danych}{lstfloat.2.2}{}}
+\@writefile{lolst}{\contentsline {lstfloat}{\numberline {2.3}{\ignorespaces Przykład modyfikacji struktury bazy danych}}{20}{lstfloat.2.3}\protected@file@percent }
+\newlabel{lst:liquibase-modify}{{2.3}{20}{Przykład modyfikacji struktury bazy danych}{lstfloat.2.3}{}}
+\@writefile{lolst}{\contentsline {lstfloat}{\numberline {2.4}{\ignorespaces Fragment klasy encji Sensor z adnotacjami Lombok}}{21}{lstfloat.2.4}\protected@file@percent }
+\newlabel{lst:lombok}{{2.4}{21}{Fragment klasy encji Sensor z adnotacjami Lombok}{lstfloat.2.4}{}}
+\@writefile{lolst}{\contentsline {lstfloat}{\numberline {2.5}{\ignorespaces Fragment konfiguracji dla profilu lokalnego}}{21}{lstfloat.2.5}\protected@file@percent }
+\newlabel{lst:profile-local}{{2.5}{21}{Fragment konfiguracji dla profilu lokalnego}{lstfloat.2.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces Przykładowy widok dokumentacji API wygenerowanej przez Swagger UI}}{22}{figure.caption.17}\protected@file@percent }
+\newlabel{fig:swagger-ui}{{2.1}{22}{Przykładowy widok dokumentacji API wygenerowanej przez Swagger UI}{figure.caption.17}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Modularność oraz szczegółowa architektura systemu}{23}{chapter.3}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}Modularyzacja i podział odpowiedzialności w systemie}{23}{section.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.1}Moduł podstawowy Sensor --- zarządzanie odczytami czujników}{23}{subsection.3.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.2}Moduł Influx --- integracja z bazą szeregów czasowych}{23}{subsection.3.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.3}Moduł LiveData --- komunikacja w czasie rzeczywistym}{23}{subsection.3.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.4}Moduł Scheduler --- automatyzacja zadań}{23}{subsection.3.1.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.5}Moduł Admin --- zarządzanie konfiguracją}{24}{subsection.3.1.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Wielowarstwowa architektura aplikacji}{24}{section.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Warstwa kontrolerów (API endpoints)}{24}{subsection.3.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Warstwa serwisów (logika biznesowa)}{24}{subsection.3.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.3}Warstwa dostępu do danych (repozytoria)}{24}{subsection.3.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Przepływ danych w systemie}{24}{section.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.4}Oferowane funkcjonalności w ujęciu modularnym}{24}{section.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Podsumowanie doświadczeń projektowych}{25}{chapter.4}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Napotkane wyzwania i zastosowane rozwiązania}{25}{section.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Potencjalne kierunki rozwoju systemu Climatly}{25}{section.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}Osiągnięte rezultaty i wnioski końcowe}{25}{section.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{Podsumowanie}{26}{chapter*.18}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{Spis listingów}{27}{chapter*.19}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{Spis rysunków}{28}{chapter*.20}\protected@file@percent }
+\bibcite{bib:vaadin2023}{1}
+\bibcite{bib:oracle2023}{2}
+\bibcite{bib:guvi2023}{3}
+\bibcite{bib:fielding2000}{4}
+\bibcite{bib:htmx2023}{5}
+\bibcite{bib:ibm2024}{6}
+\@writefile{toc}{\contentsline {chapter}{Bibliografia}{29}{chapter*.21}\protected@file@percent }
+\gdef \@abspage@last{29}

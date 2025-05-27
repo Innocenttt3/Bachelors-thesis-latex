@@ -1,0 +1,32 @@
+\contentsline {chapter}{Wstęp}{5}{chapter*.2}%
+\contentsline {chapter}{\numberline {1}Wprowadzenie do systemu zarządzania siecią pogodową czujników}{6}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Koncepcja systemu Climatly oraz jego komponenty zewnętrzne}{6}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Rola oraz założenia projektowe warstwy backendowej}{7}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Wpływ zakładanych funkcjonalności na architekturę systemu}{9}{section.1.3}%
+\contentsline {chapter}{\numberline {2}Technologie i narzędzia wykorzystane w projekcie}{11}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Java jako język programowania dla aplikacji backendowych}{11}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Spring Boot jako główny framework projektu}{14}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Systemy baz danych i ich integracja w koncepcji ORM}{14}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Integracja baz danych w modelu ORM}{16}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Dodatkowe narzędzia i biblioteki}{16}{section.2.5}%
+\contentsline {chapter}{\numberline {3}Modularność oraz szczegółowa architektura systemu}{23}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Modularyzacja i podział odpowiedzialności w systemie}{23}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Moduł podstawowy Sensor --- zarządzanie odczytami czujników}{23}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Moduł Influx --- integracja z bazą szeregów czasowych}{23}{subsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.1.3}Moduł LiveData --- komunikacja w czasie rzeczywistym}{23}{subsection.3.1.3}%
+\contentsline {subsection}{\numberline {3.1.4}Moduł Scheduler --- automatyzacja zadań}{23}{subsection.3.1.4}%
+\contentsline {subsection}{\numberline {3.1.5}Moduł Admin --- zarządzanie konfiguracją}{24}{subsection.3.1.5}%
+\contentsline {section}{\numberline {3.2}Wielowarstwowa architektura aplikacji}{24}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Warstwa kontrolerów (API endpoints)}{24}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Warstwa serwisów (logika biznesowa)}{24}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Warstwa dostępu do danych (repozytoria)}{24}{subsection.3.2.3}%
+\contentsline {section}{\numberline {3.3}Przepływ danych w systemie}{24}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Oferowane funkcjonalności w ujęciu modularnym}{24}{section.3.4}%
+\contentsline {chapter}{\numberline {4}Podsumowanie doświadczeń projektowych}{25}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Napotkane wyzwania i zastosowane rozwiązania}{25}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Potencjalne kierunki rozwoju systemu Climatly}{25}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Osiągnięte rezultaty i wnioski końcowe}{25}{section.4.3}%
+\contentsline {chapter}{Podsumowanie}{26}{chapter*.18}%
+\contentsline {chapter}{Spis listingów}{27}{chapter*.19}%
+\contentsline {chapter}{Spis rysunków}{28}{chapter*.20}%
+\contentsline {chapter}{Bibliografia}{29}{chapter*.21}%
