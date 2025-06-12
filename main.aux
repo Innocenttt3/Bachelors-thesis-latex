@@ -29,39 +29,43 @@
 \newlabel{lst:liquibase-modify}{{2.3}{20}{Przykład modyfikacji struktury bazy danych}{lstfloat.2.3}{}}
 \@writefile{lolst}{\contentsline {lstfloat}{\numberline {2.4}{\ignorespaces Fragment klasy encji Sensor z adnotacjami Lombok}}{21}{lstfloat.2.4}\protected@file@percent }
 \newlabel{lst:lombok}{{2.4}{21}{Fragment klasy encji Sensor z adnotacjami Lombok}{lstfloat.2.4}{}}
-\@writefile{lolst}{\contentsline {lstfloat}{\numberline {2.5}{\ignorespaces Fragment konfiguracji dla profilu lokalnego}}{21}{lstfloat.2.5}\protected@file@percent }
-\newlabel{lst:profile-local}{{2.5}{21}{Fragment konfiguracji dla profilu lokalnego}{lstfloat.2.5}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces Przykładowy widok dokumentacji API wygenerowanej przez Swagger UI}}{22}{figure.caption.17}\protected@file@percent }
-\newlabel{fig:swagger-ui}{{2.1}{22}{Przykładowy widok dokumentacji API wygenerowanej przez Swagger UI}{figure.caption.17}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {3}Modularność oraz szczegółowa architektura systemu}{23}{chapter.3}\protected@file@percent }
+\@writefile{lolst}{\contentsline {lstfloat}{\numberline {2.5}{\ignorespaces Fragment konfiguracji dla profilu lokalnego}}{22}{lstfloat.2.5}\protected@file@percent }
+\newlabel{lst:profile-local}{{2.5}{22}{Fragment konfiguracji dla profilu lokalnego}{lstfloat.2.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces Przykładowy widok dokumentacji API wygenerowanej przez Swagger UI}}{23}{figure.caption.17}\protected@file@percent }
+\newlabel{fig:swagger-ui}{{2.1}{23}{Przykładowy widok dokumentacji API wygenerowanej przez Swagger UI}{figure.caption.17}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Modularność oraz szczegółowa architektura systemu}{24}{chapter.3}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {3.1}Modularyzacja i podział odpowiedzialności w systemie}{23}{section.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.1}Moduł podstawowy Sensor --- zarządzanie odczytami czujników}{23}{subsection.3.1.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.2}Moduł Influx --- integracja z bazą szeregów czasowych}{23}{subsection.3.1.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.3}Moduł LiveData --- komunikacja w czasie rzeczywistym}{23}{subsection.3.1.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.4}Moduł Scheduler --- automatyzacja zadań}{23}{subsection.3.1.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.5}Moduł Admin --- zarządzanie konfiguracją}{24}{subsection.3.1.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3.2}Wielowarstwowa architektura aplikacji}{24}{section.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Warstwa kontrolerów (API endpoints)}{24}{subsection.3.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Warstwa serwisów (logika biznesowa)}{24}{subsection.3.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.3}Warstwa dostępu do danych (repozytoria)}{24}{subsection.3.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3.3}Przepływ danych w systemie}{24}{section.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3.4}Oferowane funkcjonalności w ujęciu modularnym}{24}{section.3.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}Podsumowanie doświadczeń projektowych}{25}{chapter.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}Podział odpowiedzialności w systemie}{25}{section.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.1}Moduł Sensor --- zarządzanie czujnikami}{25}{subsection.3.1.1}\protected@file@percent }
+\@writefile{lolst}{\contentsline {lstfloat}{\numberline {3.1}{\ignorespaces Encja Sensor --- centralna klasa modułu}}{26}{lstfloat.3.1}\protected@file@percent }
+\newlabel{lst:sensor-entity}{{3.1}{26}{Encja Sensor --- centralna klasa modułu}{lstfloat.3.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.2}Moduł Influx --- integracja z bazą szeregów czasowych}{26}{subsection.3.1.2}\protected@file@percent }
+\@writefile{lolst}{\contentsline {lstfloat}{\numberline {3.2}{\ignorespaces Metoda generująca zapytania Flux w module Influx}}{27}{lstfloat.3.2}\protected@file@percent }
+\newlabel{lst:flux-query}{{3.2}{27}{Metoda generująca zapytania Flux w module Influx}{lstfloat.3.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.3}Moduł LiveData --- komunikacja w czasie rzeczywistym}{28}{subsection.3.1.3}\protected@file@percent }
+\@writefile{lolst}{\contentsline {lstfloat}{\numberline {3.3}{\ignorespaces Fragment kontrolera SSE obsługujący strumieniowanie wszystkich czujników}}{28}{lstfloat.3.3}\protected@file@percent }
+\newlabel{lst:live-controller}{{3.3}{28}{Fragment kontrolera SSE obsługujący strumieniowanie wszystkich czujników}{lstfloat.3.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.4}Moduł Scheduler --- automatyzacja zadań}{29}{subsection.3.1.4}\protected@file@percent }
+\newlabel{lst:scheduler}{{3.1.4}{30}{Moduł Scheduler --- automatyzacja zadań}{lstnumber.-9.48}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.5}Moduł Admin --- zarządzanie konfiguracją}{30}{subsection.3.1.5}\protected@file@percent }
+\newlabel{lst:admin-service}{{3.1}{31}{Serwis Admin z metodą aktualizacji wsadowej}{lstlisting.3.1}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {3.1}{\ignorespaces Serwis Admin z metodą aktualizacji wsadowej}}{31}{lstlisting.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Przepływ danych w systemie}{31}{section.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Podsumowanie doświadczeń projektowych}{32}{chapter.4}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {4.1}Napotkane wyzwania i zastosowane rozwiązania}{25}{section.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.2}Potencjalne kierunki rozwoju systemu Climatly}{25}{section.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.3}Osiągnięte rezultaty i wnioski końcowe}{25}{section.4.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{Podsumowanie}{26}{chapter*.18}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{Spis listingów}{27}{chapter*.19}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{Spis rysunków}{28}{chapter*.20}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Napotkane wyzwania i zastosowane rozwiązania}{32}{section.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Potencjalne kierunki rozwoju systemu Climatly}{32}{section.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}Osiągnięte rezultaty i wnioski końcowe}{32}{section.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{Podsumowanie}{33}{chapter*.18}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{Spis listingów}{34}{chapter*.19}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{Spis rysunków}{35}{chapter*.20}\protected@file@percent }
 \bibcite{bib:vaadin2023}{1}
 \bibcite{bib:oracle2023}{2}
 \bibcite{bib:guvi2023}{3}
 \bibcite{bib:fielding2000}{4}
 \bibcite{bib:htmx2023}{5}
 \bibcite{bib:ibm2024}{6}
-\@writefile{toc}{\contentsline {chapter}{Bibliografia}{29}{chapter*.21}\protected@file@percent }
-\gdef \@abspage@last{29}
+\@writefile{toc}{\contentsline {chapter}{Bibliografia}{36}{chapter*.21}\protected@file@percent }
+\gdef \@abspage@last{36}

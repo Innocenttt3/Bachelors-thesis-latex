@@ -2,4 +2,7 @@
 \contentsline {lstfloat}{\numberline {2.2}{\ignorespaces Fragment pliku inicjalizującego schemat bazy danych}}{19}{lstfloat.2.2}%
 \contentsline {lstfloat}{\numberline {2.3}{\ignorespaces Przykład modyfikacji struktury bazy danych}}{20}{lstfloat.2.3}%
 \contentsline {lstfloat}{\numberline {2.4}{\ignorespaces Fragment klasy encji Sensor z adnotacjami Lombok}}{21}{lstfloat.2.4}%
-\contentsline {lstfloat}{\numberline {2.5}{\ignorespaces Fragment konfiguracji dla profilu lokalnego}}{21}{lstfloat.2.5}%
+\contentsline {lstfloat}{\numberline {2.5}{\ignorespaces Fragment konfiguracji dla profilu lokalnego}}{22}{lstfloat.2.5}%
+\contentsline {lstfloat}{\numberline {3.1}{\ignorespaces Encja Sensor --- centralna klasa modułu}}{26}{lstfloat.3.1}%
+\contentsline {lstfloat}{\numberline {3.2}{\ignorespaces Metoda generująca zapytania Flux w module Influx}}{27}{lstfloat.3.2}%
+\contentsline {lstfloat}{\numberline {3.3}{\ignorespaces Fragment kontrolera SSE obsługujący strumieniowanie wszystkich czujników}}{28}{lstfloat.3.3}%

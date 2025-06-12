@@ -424,27 +424,39 @@ Wykorzystanie Lomboka szczególnie usprawnia pracę ze Springiem, który dla opt
 
 \begin{lstfloat}[htbp]
 \begin{lstlisting}[language=java]
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 @Getter
 @Setter
 @Entity
-@Table(name = "sensor")
-public class Sensor implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Short id;
+@Table(name = "sensor_data")
+public class SensorData {
 
-    @Enumerated(EnumType.STRING)
-    private SensorStatus status;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "data_id")
+  private Long dataId;
 
-    private ZonedDateTime lastUpdate;
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "sensor_id", nullable = false)
+  private Sensor sensor;
+
+  private ZonedDateTime timestamp;
+
+  @Column(precision = 5, scale = 1)
+  private BigDecimal temperature;
+
+  private Integer humidity;
+
+  private Integer pressure;
 }
 \end{lstlisting}
 \caption{Fragment klasy encji Sensor z adnotacjami Lombok}
 \label{lst:lombok}
 \end{lstfloat}
+\vfill
 
 \vspace{2cm}
 
@@ -483,53 +495,275 @@ Swagger to narzędzie do automatycznego generowania dokumentacji interfejsu API 
 
 \chapter{Modularność oraz szczegółowa architektura systemu}
 
-Testowo cos innego
+Projektując warstwę serwerową systemu Climatly, przyjąłem architekturę modularną, która wynika bezpośrednio z wcześniej zidentyfikowanych funkcjonalności oraz założeń projektowych. Modularność nie była jedynie wyborem architektonicznym, ale koniecznością wynikającą z różnorodności wymagań technicznych oraz potrzeby zachowania elastyczności systemu, aby potencjalne awarie jednego z modułów z góry nie skreślały działania pozostałych części.
 
-\section{Modularyzacja i podział odpowiedzialności w systemie}
+Architektura modularna przynosi kilka istotnych korzyści w kontekście systemu zarządzania danymi pogodowymi. Po pierwsze, umożliwia separację odpowiedzialności — każdy moduł koncentruje się na konkretnym aspekcie działania systemu, co ułatwia zrozumienie kodu i jego utrzymanie. Po drugie, wspiera niezależny rozwój — różne funkcjonalności mogą być rozwijane równolegle bez ryzyka konfliktów. Po trzecie, zwiększa testowalność — każdy moduł może być testowany w izolacji, co upraszcza proces weryfikacji poprawności działania. Wreszcie, ułatwia diagnozowanie problemów — błędy są lokalizowane w obrębie konkretnych modułów, co przyspiesza proces debugowania.
 
-Testowo cos innego
+\begin{itemize}[itemsep=3pt,topsep=5pt,parsep=0pt]
+\item \textbf{Separacja odpowiedzialności} --- Każdy moduł koncentruje się na konkretnym aspekcie działania systemu, co ułatwia zrozumienie kodu i jego utrzymanie. Programista pracujący nad modułem Scheduler nie musi znać szczegółów implementacji komunikacji z InfluxDB.
 
-\subsection{Moduł podstawowy Sensor --- zarządzanie odczytami czujników}
+\item \textbf{Niezależny rozwój} --- Różne funkcjonalności mogą być rozwijane równolegle bez ryzyka konfliktów. Podczas gdy jeden developer optymalizuje zapytania Flux, inny może skupić się na ulepszaniu mechanizmów SSE.
 
-Testowo cos innego
+\item \textbf{Zwiększona testowalność} --- Każdy moduł może być testowany w izolacji, co upraszcza proces weryfikacji poprawności działania. Testy modułu Admin nie wymagają uruchomienia bazy InfluxDB.
+
+\item \textbf{Łatwiejsze diagnozowanie problemów} --- Błędy są lokalizowane w obrębie konkretnych modułów, co przyspiesza proces debugowania. Problemy z połączeniami SSE nie wpływają na pobieranie danych historycznych.
+
+\item \textbf{Elastyczność w rozbudowie} --- Nowe funkcjonalności można dodawać jako osobne moduły bez modyfikacji istniejącego kodu, zachowując stabilność działającego systemu.
+\end{itemize}
+
+\section{Podział odpowiedzialności w systemie}
+
+\subsection{Moduł Sensor --- zarządzanie czujnikami}
+Moduł Sensor stanowi rdzeń systemu Climatly i odpowiada za kompleksowe zarządzanie danymi czujników meteorologicznych. Jest to najbardziej rozbudowany moduł, który integruje dane z dwóch źródeł: metadane z bazy PostgreSQL oraz surowe odczyty z bazy InfluxDB lecz nie odpowiada za ich bezpośredni odczyt.
+
+\textbf{Główne zadania modułu:}
+\begin{itemize}[itemsep=2pt,topsep=4pt,parsep=0pt]
+\item \textbf{Zarządzanie metadanymi czujników} --- Moduł przechowuje i zarządza informacjami kontekstowymi o czujnikach, takimi jak lokalizacja geograficzna, przypisanie do konkretnego budynku i piętra, status operacyjny oraz konfigurację częstotliwości odświeżania danych. Te metadane są kluczowe dla nadania sensu surowym odczytom pomiarowym.
+
+\item \textbf{Udostępnianie danych historycznych} --- Realizuje interfejs REST API umożliwiający pobieranie historycznych danych pomiarowych w różnych przekrojach czasowych i przestrzennych. Obsługuje filtrowanie według dat, lokalizacji oraz konkretnych czujników, zapewniając paginację dla dużych zestawów danych.
+
+\item \textbf{Agregacja i kontekstualizacja danych} --- Łączy oraz agreguje surowe odczyty z InfluxDB z metadanymi z PostgreSQL, tworząc kompletne odpowiedzi zawierające zarówno wartości pomiarowe, jak i informacje o lokalizacji oraz statusie czujników.
+\end{itemize}
+
+
+Serce modułu stanowi encja \texttt{Sensor}, która reprezentuje fizyczny czujnik meteorologiczny w systemie. Encja ta łączy w sobie zarówno aktualne odczyty pomiarowe, jak i metadane opisujące czujnik:
+
+\begin{lstfloat}[H]
+\begin{lstlisting}[language=java]
+@Entity
+@Table(name = "sensor")
+public class Sensor implements Serializable{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Short id;
+
+    @Enumerated(EnumType.STRING)
+    private SensorStatus status;
+
+    private ZonedDateTime lastUpdate;
+    private BigDecimal temperature;
+    private Integer humidity;
+    private Integer pressure;
+    private Short refreshRate;
+    private Short floor;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "location_id")
+    private Location location;
+
+
+    public void updateFromSensorData(SensorData latestSensorData, Clock clock) {
+        this.temperature = latestSensorData.getTemperature();
+        this.humidity = latestSensorData.getHumidity();
+        this.pressure = latestSensorData.getPressure();
+        this.lastUpdate = ZonedDateTime.now(clock);
+    }
+}
+\end{lstlisting}
+\caption{Encja Sensor --- centralna klasa modułu}
+\label{lst:sensor-entity}
+\end{lstfloat}
+
 
 \subsection{Moduł Influx --- integracja z bazą szeregów czasowych}
 
-Testowo cos innego
+Moduł Influx stanowi wyspecjalizowany komponent systemu dedykowany wyłącznie odczytom danych z czujników meteorologicznych. Jest jedynym modułem posiadającym bezpośrednie połączenie z bazą szeregów czasowych InfluxDB, co zapewnia kontrolowaną i scentralizowaną komunikację z tym krytycznym źródłem danych. Wydzielenie funkcjonalności do osobnego modułu skutecznie rozwiązało wyzwania związane ze złożonym wykorzystywaniem języka Flux do konstruowania zapytań czasowych.
+
+\vspace{0.5em}
+\textbf{Główne odpowiedzialności modułu:}
+\begin{itemize}[itemsep=2pt,topsep=4pt,parsep=0pt]
+\item \textbf{Wyłączny dostęp do InfluxDB} --- Stanowi jedyną bramę komunikacyjną z bazą szeregów czasowych, centralizując wszystkie operacje pobierania danych pomiarowych i eliminując duplikację połączeń w systemie.
+
+\item \textbf{Walidacja i mapowanie danych} --- Sprawdza poprawność i kompletność pobranych odczytów, obsługuje sytuacje z brakującymi lub opóźnionymi danymi. Po poprawnej walidacji przekształca surowe odpowiedzi InfluxDB na typowane obiekty Java wykorzystywane w pozostałych częściach systemu.
+
+\item \textbf{Dynamiczne generowanie zapytań Flux} --- Automatycznie konstruuje zoptymalizowane zapytania w języku Flux na podstawie zewnętrznych parametrów, takich jak identyfikator czujnika czy częstotliwość odświeżania danych. Dzięki temu inne moduły nie muszą wchodzić w bezpośrednią interakcję ze złożoną składnią Flux.
+
+\end{itemize}
+
+\vspace{-0.4em}
+
+Kluczowym elementem modułu jest metoda \texttt{buildQueryWithParams()}, która dynamicznie konstruuje zapytania w języku Flux dostosowane do specyficznych wymagań każdego żądania:
+
+\begin{lstfloat}[H]
+\begin{lstlisting}[language=java]
+private String buildQueryWithParams(Short sensorId, Short refreshRate) {
+    return String.format(
+        """
+        from(bucket: "%s")
+          |> range(start: -%ds)
+          |> filter(fn: (r) => r["_measurement"] == "sensor_readings")
+          |> filter(fn: (r) => r["_field"] == "%s" or
+                               r["_field"] == "%s" or
+                               r["_field"] == "%s" or
+                               r["_field"] == "%s")
+          |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
+          |> filter(fn: (r) => r["sensor_id"] == %s)
+          |> last(column: "_time")
+        """,
+        bucket,
+        refreshRate,
+        HUMIDITY_FIELD,
+        PRESSURE_FIELD,
+        TEMPERATURE_FIELD,
+        SENSOR_ID_FIELD,
+        sensorId);
+}
+\end{lstlisting}
+\caption{Metoda generująca zapytania Flux w module Influx}
+\label{lst:flux-query}
+\end{lstfloat}
 
 \subsection{Moduł LiveData --- komunikacja w czasie rzeczywistym}
 
-Testowo cos innego
+Moduł LiveData implementuje zaawansowaną funkcjonalność strumieniowania danych w czasie rzeczywistym przy użyciu technologii Server-Sent Events (SSE). Stanowi kluczowy komponent umożliwiający aplikacji klienckiej otrzymywanie aktualnych odczytów z czujników w czasie rzeczywistym bez obciążania serwera.
+
+\textbf{Główne odpowiedzialności modułu:}
+\begin{itemize}[itemsep=2pt,topsep=0pt,parsep=0pt]
+\vspace{0.5em}
+\item \textbf{Zarządzanie połączeniami SSE} --- Utrzymuje aktywne połączenia z klientami, zarządza ich cyklem życia oraz automatycznie usuwa nieaktywne połączenia w przypadku przerwania transmisji lub timeout-u.
+
+\item \textbf{Subskrypcje tematyczne} --- Umożliwia klientom subskrybowanie konkretnych czujników lub wszystkich aktualizacji w systemie, efektywnie filtrując i kierując odpowiednie powiadomienia do zainteresowanych odbiorców.
+
+\item \textbf{Rozgłaszanie aktualizacji} --- Natychmiast wysyła powiadomienia o nowych odczytach do wszystkich zainteresowanych klientów, zapewniając synchronizację danych w czasie rzeczywistym.
+
+\item \textbf{Optymalizacja przepustowości} --- Implementuje mechanizmy heartbeat, reconnection oraz buforowania zdarzeń, minimalizując obciążenie sieci przy jednoczesnym zachowaniu niezawodności połączeń.
+\end{itemize}
+
+Kluczowym elementem modułu jest kontroler \texttt{LiveController}, który demonstruje zaawansowaną obsługę połączeń Server-Sent Events z precyzyjną konfiguracją nagłówków HTTP:
+
+\begin{lstfloat}[H]
+\begin{lstlisting}[language=java]
+@RestController
+@RequestMapping("/live-api/sensors")
+public class LiveController {
+
+    private final ISseEmitterService sseEmitterService;
+
+    @GetMapping(produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public ResponseEntity<SseEmitter> streamAllSensorsUpdates(
+        @RequestHeader(value = "Last-Event-ID", required = false) String lastEventId,
+        HttpServletResponse response) {
+
+        String clientId = UUID.randomUUID().toString();
+        SseEmitter emitter = sseEmitterService.createSseEmitter(clientId, null);
+        return ResponseEntity.ok().contentType(MediaType.TEXT_EVENT_STREAM).body(emitter);
+    }
+\end{lstlisting}
+\caption{Fragment kontrolera SSE obsługujący strumieniowanie wszystkich czujników}
+\label{lst:live-controller}
+\end{lstfloat}
+
 
 \subsection{Moduł Scheduler --- automatyzacja zadań}
 
-Testowo cos innego
+Moduł Scheduler stanowi prosty choć zaawansowany komponent systemu, który powstał z konieczności implementacji indywidualnego procesowania każdego czujnikia. Wcześniejsze podejście generowało istotne problemy operacyjne, które szczegółowo omówię w rozdziale 4. Moduł odpowiada za efektywne zarządzanie pulą wirtualnych wątków, przydzielając każdemu z nich niezależne zadania cyklicznej aktualizacji danych pomiarowych.
+
+Główną odpowiedzialością modułu jest koordynacja harmonogramu pobierania najnowszych odczytów z bazy InfluxDB oraz synchronizacja metadanych w bazie PostgreSQL dla każdego czujnika zgodnie z jego indywidualnie skonfigurowanymi parametrami częstotliwości. Rozwiązanie oparte na mapie zadań umożliwia dynamiczne dodawanie, usuwanie oraz modyfikowanie harmonogramów poszczególnych czujników bez destabilizacji pozostałych elementów systemu.
+
+Dodatkowo, moduł implementuje mechanizm automatycznego wykrywania nieaktywnych czujników oraz oznaczania ich statusu jako błędnego, co zapewnia kompleksowe monitorowanie stanu całej infrastruktury pomiarowej.
+
+Centralnym elementem modułu jest klasa \texttt{Scheduler}, która funkcjonuje jako koordynator wszystkich zadań cyklicznych w systemie:
+
+
+\vspace{1em}
+\begin{lstlisting}[language=java]
+@Service
+public class Scheduler {
+
+   private final Map<Short, ScheduledFuture<?>> scheduledTasks = new ConcurrentHashMap<>();
+   private final SensorUpdateService sensorUpdateService;
+   private final TaskScheduler taskScheduler;
+
+   @Value("${scheduler.default-rate:180}")
+   private short defaultRate;
+
+   @PostConstruct
+   public void init() {
+       startDefaultTasks();
+   }
+
+   public void updateTaskRates(List<Sensor> sensorsToUpdate) {
+       sensorsToUpdate.forEach(sensor -> {
+           ScheduledFuture<?> existingTask = scheduledTasks.get(sensor.getId());
+           if (existingTask != null) {
+               existingTask.cancel(false);
+               log.debug("Cancelled existing task for sensor {}", sensor.getId());
+           }
+
+           short rate = Optional.ofNullable(sensor.getRefreshRate()).orElse(defaultRate);
+           ScheduledFuture<?> newTask = taskScheduler.scheduleAtFixedRate(
+               () -> updateSingleSensor(sensor),
+               Duration.ofSeconds(rate)
+           );
+           scheduledTasks.put(sensor.getId(), newTask);
+           log.debug("Scheduled task for sensor {} with rate {} seconds", sensor.getId(), rate);
+       });
+   }
+
+   private void updateSingleSensor(Sensor sensor) {
+       try {
+           sensorUpdateService.updateSingleSensor(sensor);
+       } catch (Exception e) {
+           log.error("Failed to update sensor {}: {}", sensor.getId(), e.getMessage());
+       }
+   }
+
+   @PreDestroy
+   public void shutdown() {
+       scheduledTasks.values().forEach(task -> task.cancel(false));
+       scheduledTasks.clear();
+       log.info("Cleaned up all scheduled tasks");
+   }
+}
+\end{lstlisting}
+\caption{Klasa Scheduler zarządzająca harmonogramem zadań cyklicznych}
+\label{lst:scheduler}
 
 \subsection{Moduł Admin --- zarządzanie konfiguracją}
 
-Testowo cos innego
+Moduł Admin stanowi wyspecjalizowany komponent odpowiedzialny za zdalne zarządzanie konfiguracją systemu oraz parametrami operacyjnymi czujników. Jest to moduł o ograniczonym dostępie, zabezpieczony mechanizmem autoryzacji opartym na kluczu API, który umożliwia administratorom wprowadzanie zmian w czasie rzeczywistym bez konieczności fizycznej ingerencji w infrastrukturę. Główną charakterystyką modułu jest implementacja operacji wsadowych, które pozwalają na jednoczesną modyfikację wielu czujników, co znacząco usprawnia administrację rozległą siecią urządzeń pomiarowych.
 
-\section{Wielowarstwowa architektura aplikacji}
+Moduł oferuje dwie kluczowe funkcjonalności: zarządzanie statusem czujników poprzez aktywację, dezaktywację lub oznaczanie jako niesprawnych oraz konfigurację częstotliwości odświeżania danych dla poszczególnych urządzeń. Operacje wsadowe umożliwiają administratorom efektywne zarządzanie całymi grupami czujników jednocześnie, co jest szczególnie istotne w przypadku konieczności szybkich zmian konfiguracyjnych na dużą skalę. Dodatkowo, moduł automatycznie propaguje zmiany do modułu Scheduler, zapewniając natychmiastowe odzwierciedlenie nowych ustawień w harmonogramie zadań systemowych.
 
-\subsection{Warstwa kontrolerów (API endpoints)}
+Centralnym elementem modułu jest serwis \texttt{AdminService}, który implementuje generyczną metodę obsługującą różne typy poleceń administracyjnych:
 
-Testowo cos innego
+\begin{lstlisting}[language=java,caption={Serwis Admin z metodą aktualizacji wsadowej},label={lst:admin-service}]
+@Service
+public class AdminService implements IAdminService {
 
-\subsection{Warstwa serwisów (logika biznesowa)}
+   private final SensorRepository sensorRepository;
+   private final Scheduler scheduler;
 
-Testowo cos innego
+   @Transactional
+   public <T extends SensorCommand> void updateSensors(List<T> commands) {
+       List<Sensor> sensorsToUpdate = commands.stream()
+           .map(command -> sensorRepository.findById(command.sensorId())
+               .map(sensor -> {
+                   if (command instanceof RefreshRateCommand refreshRateCommand) {
+                       sensor.setRefreshRate(refreshRateCommand.refreshRate());
+                       log.info("Updating sensor {} refresh rate to {} seconds",
+                           sensor.getId(), refreshRateCommand.refreshRate());
+                   } else if (command instanceof StatusCommand statusCommand) {
+                       sensor.setStatus(statusCommand.status());
+                       log.info("Updating sensor {} status to {}",
+                           sensor.getId(), statusCommand.status());
+                   }
+                   return sensor;
+               })
+               .orElseThrow(() -> new SensorNotFoundException(command.sensorId())))
+           .collect(Collectors.toList());
 
-\subsection{Warstwa dostępu do danych (repozytoria)}
-
-Testowo cos innego
+       List<Sensor> savedSensors = sensorRepository.saveAll(sensorsToUpdate);
+       scheduler.updateTaskRates(savedSensors);
+       log.info("Updated {} sensors", savedSensors.size());
+   }
+}
+\end{lstlisting}
 
 \section{Przepływ danych w systemie}
 
 Testowo cos innego
 
-\section{Oferowane funkcjonalności w ujęciu modularnym}
-
-Testowo cos innego
 
 \chapter{Podsumowanie doświadczeń projektowych}
 
