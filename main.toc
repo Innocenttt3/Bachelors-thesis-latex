@@ -6,7 +6,7 @@
 \contentsline {chapter}{\numberline {2}Technologie i narzędzia wykorzystane w projekcie}{11}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Java jako język programowania dla aplikacji backendowych}{11}{section.2.1}%
 \contentsline {section}{\numberline {2.2}Spring Boot jako główny framework projektu}{14}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Systemy baz danych i ich integracja w koncepcji ORM}{14}{section.2.3}%
+\contentsline {section}{\numberline {2.3}Wykorzystane systemy baz danych}{14}{section.2.3}%
 \contentsline {section}{\numberline {2.4}Integracja baz danych w modelu ORM}{16}{section.2.4}%
 \contentsline {section}{\numberline {2.5}Dodatkowe narzędzia i biblioteki}{16}{section.2.5}%
 \contentsline {chapter}{\numberline {3}Modularność oraz szczegółowa architektura systemu}{24}{chapter.3}%
@@ -16,12 +16,11 @@
 \contentsline {subsection}{\numberline {3.1.3}Moduł LiveData --- komunikacja w czasie rzeczywistym}{28}{subsection.3.1.3}%
 \contentsline {subsection}{\numberline {3.1.4}Moduł Scheduler --- automatyzacja zadań}{29}{subsection.3.1.4}%
 \contentsline {subsection}{\numberline {3.1.5}Moduł Admin --- zarządzanie konfiguracją}{30}{subsection.3.1.5}%
-\contentsline {section}{\numberline {3.2}Przepływ danych w systemie}{31}{section.3.2}%
 \contentsline {chapter}{\numberline {4}Podsumowanie doświadczeń projektowych}{32}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Napotkane wyzwania i zastosowane rozwiązania}{32}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Potencjalne kierunki rozwoju systemu Climatly}{32}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Osiągnięte rezultaty i wnioski końcowe}{32}{section.4.3}%
-\contentsline {chapter}{Podsumowanie}{33}{chapter*.18}%
-\contentsline {chapter}{Spis listingów}{34}{chapter*.19}%
-\contentsline {chapter}{Spis rysunków}{35}{chapter*.20}%
-\contentsline {chapter}{Bibliografia}{36}{chapter*.21}%
+\contentsline {section}{\numberline {4.2}Potencjalne kierunki rozwoju systemu Climatly}{34}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Osiągnięte rezultaty i wnioski końcowe}{35}{section.4.3}%
+\contentsline {chapter}{Podsumowanie}{37}{chapter*.22}%
+\contentsline {chapter}{Spis listingów}{38}{chapter*.23}%
+\contentsline {chapter}{Spis rysunków}{39}{chapter*.24}%
+\contentsline {chapter}{Bibliografia}{40}{chapter*.25}%

@@ -71,7 +71,7 @@
 \multicolumn{2}{l}{\hspace{---12.5mm} \includegraphics[width=8cm]{LogoUMCS.jpg}} \\
 \multicolumn{2}{@{\hspace{20mm}}l}{\vspace{---4mm}} \\
 \multicolumn{2}{@{\hspace{28mm}}l}{\Large \sf UNIWERSYTET MARII
-	CURIE---SKŁODOWSKIEJ} \\
+	CURIE-SKŁODOWSKIEJ} \\
 \multicolumn{2}{@{\hspace{28mm}}l}{\vspace{---4mm}} \\
 \multicolumn{2}{@{\hspace{28mm}}l}{\Large \sf W LUBLINIE} \\
 \multicolumn{2}{@{\hspace{28mm}}l}{\vspace{---4mm}} \\
@@ -89,7 +89,7 @@
 & \Large \sf \bfseries — od CRUDa do modularnego systemu\\
 & \Large \sf \bfseries zarządzania danymi pogodowymi \\\\[---10pt]
 & {\large \sf Designing and implementing\\
-& {\large \sf a multi---layer Rest API in Spring Boot}\\
+& {\large \sf a multi-layer Rest API in Spring Boot}\\
 & {\large \sf — from CRUD to a modular\\
 & {\large \sf weather data management system\\
 & \\
@@ -102,7 +102,7 @@
 & \vspace{---7mm} \\
 & {\sf pod kierunkiem \bfseries dr hab. Beaty Byliny} \\
 \multicolumn{2}{@{\hspace{28mm}}l}{\vspace{15mm}} \\
-\multicolumn{2}{@{\hspace{28mm}}l}{\textbf{\textsf{Lublin 2022}}}
+\multicolumn{2}{@{\hspace{28mm}}l}{\textbf{\textsf{Lublin 2025}}}
 \end{tabular}
 \end{titlepage}
 
@@ -256,7 +256,7 @@ Te kluczowe cechy czynią Javę językiem doskonale dopasowanym do wymagań nowo
 
 Testowo cos innego
 
-\section{Systemy baz danych i ich integracja w koncepcji ORM}
+\section{Wykorzystane systemy baz danych}
 W projekcie Climatly zastosowałem dwa komplementarne systemy baz danych: PostgreSQL jako tradycyjną bazę relacyjną oraz InfluxDB jako specjalistyczną bazę szeregów czasowych. Wybór dwóch różnych systemów bazodanowych nie był przypadkowy – wynikał z analizy specyficznych wymagań projektu oraz charakteru przetwarzanych danych.
 \subsection*{PostgreSQL --- relacyjna baza metadanych}
 PostgreSQL to zaawansowany, otwartoźródłowy system zarządzania relacyjnymi bazami danych (RDBMS), który w projekcie Climatly pełni rolę głównego repozytorium metadanych czujników. Wybór PostgreSQL był podyktowany kilkoma kluczowymi czynnikami:
@@ -760,32 +760,93 @@ public class AdminService implements IAdminService {
 }
 \end{lstlisting}
 
-\section{Przepływ danych w systemie}
-
-Testowo cos innego
-
-
 \chapter{Podsumowanie doświadczeń projektowych}
 
-Testowo cos innego
+Proces implementacji warstwy serwerowej Climatly okazał się znacznie bardziej złożony niż pierwotnie zakładaLem, ujawniając zarówno fundamentalne wyzwania implementacyjne, jak i niespodziewane możliwości rozwoju systemu. Dopiero praktyczna realizacja pokazała prawdziwe ograniczenia przyjętych rozwiązań, które niemożliwe były do przewidzenia na etapie projektowania. Jednocześnie praca nad systemem uwidoczniła jego potencjał i możliwe kierunki ewolucji. W tym rozdziale omówie kluczowe problemy implementacyjne wraz z ich rozwiązaniami, przedstawiono perspektywy rozwoju systemu oraz podsumowano osiągnięte rezultaty wraz z  wyciągniętymi wnioskami.
 
 \section{Napotkane wyzwania i zastosowane rozwiązania}
 
-Testowo cos innego
+Podczas implementacji systemu, w fazie pierwszych testów manualnych przeprowadzonych na danych testowych, zidentyfikowałem dwa kluczowe problemy, które wymusiły zmianę podejścia w logice niektórych modułów aplikacji oraz kompletne przepisanie jednej z głównych funkcjonalności. Te wyzwania okazały się na tyle fundamentalne, że wymagały przemyślenia pierwonych założen odczytu oraz dynamicznego zarządzania danymi.
+
+\subsection*{Refaktoryzacja systemu aktualizacji danych z czujników}
+
+Jednym z kluczowych wyzwań była konieczność przeprojektowania sposobu pobierania danych z czujników. Pierwotna implementacja opierała się na synchronicznym podejściu wsadowym, gdzie dane ze wszystkich czujników pobierane były jednocześnie z bazy danych InfluxDB. Rozwiązanie to charakteryzowało się prostotą implementacji, jednak okazało się nieadekwatne do specyfiki projektu.
+Problem wynikał z różnorodności interwałów pracy czujników - niektóre urządzenia przesyłały dane co kilka sekund, inne co kilka minut. Ujednolicone podejście czasowe prowadziło do nieefektywnego wykorzystania zasobów systemowych oraz braku precyzji w aktualizacji danych.
+W odpowiedzi na te ograniczenia przeprowadziłem kompleksową refaktoryzację systemu w kierunku indywidualnego traktowania każdego czujnika. Kluczowym elementem nowego podejścia stała się klasa SensorUpdateService, która implementuje mechanizm aktualizacji pojedynczych czujników.
+
+Nowe rozwiązanie wprowadziło indywidualne parametry dla każdego czujnika, w tym własny interwał odświeżania (refreshRate), co pozwala na precyzyjne dostosowanie częstotliwości aktualizacji do charakterystyki danego urządzenia.
+
+Zastosowane podejście przyniosło znaczące korzyści:
+\begin{itemize}
+    \item \textbf{Skalowalność pozioma} -- system może obsłużyć dowolną liczbę czujników bez konieczności modyfikacji implementacji
+    \item \textbf{Precyzja czasowa} -- każdy czujnik aktualizowany jest zgodnie z własnymi parametrami
+    \item \textbf{Izolacja błędów} -- awaria pojedynczego czujnika nie wpływa na funkcjonowanie pozostałych urządzeń
+    \item \textbf{Optymalizacja zasobów} -- wątki przydzielane są dynamicznie na podstawie rzeczywistych potrzeb
+\end{itemize}
+
+\subsection*{Integracja REST API oraz WebFlux}
+
+Kolejnym istotnym wyzwaniem była implementacja dynamicznego wystawiania danych w czasie rzeczywistym. Początkowo rozważałem zastosowanie Spring WebFlux -- reaktywnej platformy programistycznej, która umożliwia ciągłe przesyłanie danych do klienta w ramach pojedynczego połączenia HTTP.
+
+Jednak w praktyce okazało się, że mieszanie reaktywnej architektury z tradycyjnym podejściem REST API w ramach jednej aplikacji jest problematyczne. Nawet umieszczenie obu rozwiązań w osobnych modułach projektu nie rozwiązało fundamentalnych konfliktów architektonicznych.
+
+Główny problem polegał na konkurencji o dostęp do połączeń z bazą danych. WebFlux ze swoimi reaktywnymi mechanizmami i tradycyjne Spring MVC z blokowymi operacjami konkurowały o te same zasoby. Korzystanie wyłącznie z jednej technologii nie powodowało problemów, lecz próba równoczesnego wykorzystania obu funkcjonalności prowadziła do zatrzymania aplikacji i zjawiska walki wątków o połączenie.
+
+Problem wynikał z fundamentalnych różnic w zarządzaniu wątkami:
+\begin{itemize}
+   \item \textbf{Spring MVC}: jeden wątek na żądanie (thread-per-request model)
+   \item \textbf{WebFlux}: niewielka pula wątków obsługująca wszystkie operacje asynchronicznie
+\end{itemize}
+
+W odpowiedzi na te ograniczenia zdecydowałem się na użycie Server-Sent Events (SSE) -- standard HTML5 umożliwiający serwerowi wysyłanie informacji w czasie rzeczywistym przez pojedyncze połączenie HTTP. SSE jest w pełni zgodne z architekturą Spring MVC i eliminuje konflikty o zasoby bazodanowe z główną logiką aplikacji.
 
 \section{Potencjalne kierunki rozwoju systemu Climatly}
 
-Testowo cos innego zeby sprawdzic czy dziala
+\subsection*{Przejście na architekturę Event-Driven Development}
+
+Event-Driven Development to paradygmat architektoniczny, w którym przepływ danych i logika aplikacji są napędzane przez zdarzenia - eventy. W tym podejściu komponenty systemu komunikują się poprzez publikowanie i nasłuchiwanie zdarzeń, zamiast bezpośredniego wywoływania funkcji czy metod. Każde zdarzenie reprezentuje zmianę stanu w systemie i może wyzwalać reakcje w innych komponentach, tworząc reaktywny i luźno sprzężony system.
+Obecna architektura systemu opiera się na modelu, w którym backend aktywnie zarządza procesem aktualizacji czujników oraz wymaga wykorzystania dedykowanej bazy szeregów czasowych InfluxDB. Takie podejście wprowadza dodatkową złożoność i punkty potencjalnych awarii.
+Proponowana refaktoryzacja zakłada fundamentalną zmianę paradygmatu - przejście od modelu gdzie backend dba o aktualizację sytuacji, do architektury gdzie nowy odczyt z czujnika rozpoczyna dominę całego przepływu danych w systemie.
+
+Kluczowym elementem nowego podejścia byłoby zastąpienie warstwy InfluxDB kolejką komunikatów. Każdy odczyt z czujnika automatycznie inicjowałby sekwencję zdarzeń przepływającą przez cały system - od przetworzenia danych, przez zapis do bazy, aż po aktualizację interfejsu użytkownika. Po stronie backendu powstałyby dedykowane handlery subskrybujące konkretne topiki, które automatycznie reagowałyby na nowe zdarzenia z czujników, eliminując konieczność aktywnego monitorowania ich stanu.
+
+W takiej architekturze backend przestałby być odpowiedzialny za zarządzanie procesem aktualizacji, a zamiast tego każde zdarzenie z czujnika naturalnie przepływałoby przez system, znacznie upraszczając logikę aplikacji i zwiększając responsywność całego rozwiązania.
+Korzyści obejmują eliminację skomplikowanych mechanizmów synchronizacji, redukcję punktów awarii oraz zwiększenie skalowalności systemu.
+
+\subsection*{Dodatkowy modul odpowiedzialny za autoryzacje}
+
+Drugim istotnym kierunkiem rozwoju jest implementacja systemu autoryzacji, który otworzyłby bramę na szereg funkcjonalności znacząco poprawiających user experience i zachęcających użytkowników do dłuższego korzystania z systemu. Obecny model otwarty, choć prosty w implementacji, ogranicza możliwości tworzenia angażujących doświadczeń użytkownika.
+
+Stworzenie modułu autoryzacji umożliwiłoby wprowadzenie funkcjonalności takich jak:
+\begin{itemize}
+   \item Zarządzanie ulubionymi lokalizacjami i czujnikami
+   \item System powiadomień o krytycznych zmianach w obserwowanych lokalizacjach
+   \item Personalizowane dashboardy z najczęściej odwiedzanymi miejscami
+   \item System profili użytkowników ze śledzeniem historii wizyt na uczelni
+   \item Konfiguracja indywidualnych progów alarmowych dla parametrów środowiskowych
+\end{itemize}
+
+Jednak implementacja takiego modułu wiąże się z ogromnymi wyzwaniami bezpieczeństwa, które wymagałyby znacznych nakładów pracy i szczególnej ostrożności. Kluczowym problemem jest fakt, że ulubione lokalizacje użytkowników czy często sprawdzane przedziąly czasowe, mogą ujawnić wrażliwe informacje o ich harmonogramie zajęć, miejscu studiów czy nawet rutynowych zachowaniach.
+
+Pomimo tych wyzwań, moduł autoryzacji mógłby przekształcić Climatly z prostego narzędzia informacyjnego w spersonalizowaną platformę, która pozwalałaby użytkownikom dostosować system do swoich indywidualnych potrzeb -- ulubionych lokalizacji, godzin zajęć czy preferowanych sal wykładowych. Taka personalizacja zachęcałaby użytkowników do regularnego korzystania z systemu i dłuższego pozostawania w aplikacji. Kluczem do sukcesu byłoby jednak zagwarantowanie najwyższych standardów bezpieczeństwa i prywatności danych użytkowników.
 
 \section{Osiągnięte rezultaty i wnioski końcowe}
 
-Testowo cos innego zeby skompilowac
+Realizacja backendu projektu Climatly w pełni osiągnęła założone cele projektowe, dostarczając funkcjonalną warstwę serwerową umożliwiającą monitoring parametrów środowiskowych w czasie rzeczywistym. System zapewnia nieprzerwane śledzenie temperatury, wilgotności i ciśnienia atmosferycznego z różnych lokalizacji, oferując zarówno dostęp do aktualnych danych poprzez Server-Sent Events, jak i możliwość analizy trendów historycznych przez rozbudowane API. Wszystkie kluczowe funkcjonalności zostały zaimplementowane zgodnie z pierwotnymi założeniami, a dodatkowo system zyskał mechanizmy automatycznej obsługi błędów oraz skalowalną architekturę przekraczającą początkowe wymagania.
 
+Proces implementacji przyniósł znaczące korzyści edukacyjne, umożliwiając praktyczne poznanie szerokiego spektrum technologii backendowych. Szczególnie wartościowe okazało się głębokie zrozumienie ekosystemu Spring Boot, mechanizmów komunikacji w czasie rzeczywistym oraz integracji z bazami danych szeregów czasowych. Najtrudniejszym wyzwaniem podczas całej realizacji było dynamiczne wystawianie danych w czasie rzeczywistym, które wymagało przemyślenia różnych podejść architektonicznych i ostatecznie doprowadziło do odkrycia ograczeń związanych z mieszaniem reaktywnych i tradycyjnych wzorców w jednej aplikacji. To doświadczenie znacząco poszerzyło perspektywę na projektowanie systemów webowych i znaczenie właściwego doboru technologii.
+
+Opracowana warstwa serwerowa stanowi solidną podstawę projektu, która umożliwia rozbudowę o nowe funkcjonalności wykorzystując już rozwiązane problemy architektoniczne. Modularna struktura systemu oraz wypracowane mechanizmy obsługi danych w czasie rzeczywistym stwarzają możliwości rozwoju w kierunku zaawansowanych narzędzi analitycznych, skalowania na większą liczbę czujników czy integracji z innymi typami urządzeń. System może służyć jako fundament dla kolejnych rozwiązań -- od aplikacji do analizy trendów środowiskowych, przez systemy predykcyjne, po platformy zarządzania infrastrukturą uczelnianą na większą skalę.
 \chapter*{Podsumowanie}
 \addcontentsline{toc}{chapter}{Podsumowanie}
 \chaptermark{Podsumowanie}
 
-Tu treść podsumowania ktora zostala zmieniona.
+Niniejsza praca licencjacka przedstawiła proces projektowania i implementacji warswy systemowej projektu Climatly - rozwiązania do monitoringu parametrów środowiskowych w czasie rzeczywistym. Praca obejmowała analizę wymagań, projektowanie architektury systemu, implementację warstwy serwerowej oraz dokumentację napotkanych wyzwań i zastosowanych rozwiązań.
+
+Proces pisania pracy okazał się równie pouczający co sama implementacja projektu. Konieczność systematycznego dokumentowania decyzji projektowych, analizy alternatywnych rozwiązań oraz refleksji nad napotkanymi problemami znacząco pogłębiła zrozumienie całego procesu tworzenia oprogramowania. Szczególnie wartościowe było łączenie aspektów teoretycznych z praktyczną implementacją oraz konieczność krytycznej oceny własnych rozwiązań.
+
+Powyższa praca potwierdza, że kompleksowe podejście do dokumentacji projektów informatycznych - od analizy wymagań przez implementację aż po wnioski końcowe - stanowi istotny element procesu edukacyjnego, umożliwiający nie tylko realizację konkretnego rozwiązania, ale również rozwój umiejętności inżynierskich oraz zdolności do refleksji nad własnymi decyzjami technicznymi.
+
 
 \listof{lstfloat}{Spis listingów} % jeśli są tabele
 \addcontentsline{toc}{chapter}{Spis listingów}

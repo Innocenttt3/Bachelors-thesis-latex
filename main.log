@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.4.19)  27 MAY 2025 16:37
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.4.19)  16 JUN 2025 20:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -576,7 +576,7 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 69.
 (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<LogoUMCS.jpg, id=112, 284.7438pt x 100.2144pt>
+<LogoUMCS.jpg, id=108, 284.7438pt x 100.2144pt>
 File: LogoUMCS.jpg Graphic file (type jpg)
 <use LogoUMCS.jpg>
 Package pdftex.def Info: LogoUMCS.jpg  used on input line 71.
@@ -586,7 +586,7 @@ Package pdftex.def Info: LogoUMCS.jpg  used on input line 71.
 <inserted text> 
                 }
 l.92 &
-       {\large \sf a multi---layer Rest API in Spring Boot}\\
+       {\large \sf a multi-layer Rest API in Spring Boot}\\
 I've put in what seems to be necessary to fix
 the current column of the current alignment.
 Try to go on, since this might almost work.
@@ -657,7 +657,7 @@ Rozdzia\PlPrIeC {\l } 1.
 [8]
 
 [9]
-<Climatly-modules.pdf, id=204, 1317.45201pt x 279.75516pt>
+<Climatly-modules.pdf, id=199, 1317.45201pt x 279.75516pt>
 File: Climatly-modules.pdf Graphic file (type pdf)
 <use Climatly-modules.pdf>
 Package pdftex.def Info: Climatly-modules.pdf  used on input line 202.
@@ -780,7 +780,7 @@ l.468 \begin{lstlisting}[language=yaml]
 The language is not loadable. Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-<swagger.png, id=382, 581.17125pt x 699.61375pt>
+<swagger.png, id=377, 581.17125pt x 699.61375pt>
 File: swagger.png Graphic file (type png)
 <use swagger.png>
 Package pdftex.def Info: swagger.png  used on input line 491.
@@ -970,7 +970,15 @@ Rozdzia\PlPrIeC {\l } 4.
 
 ]
 
-[33
+[33]
+
+[34]
+
+[35]
+
+[36]
+
+[37
 
 ] (./main.lolst)
 \tf@lolst=\write5
@@ -978,7 +986,7 @@ Rozdzia\PlPrIeC {\l } 4.
 
 
 
-[34
+[38
 
 ] (./main.lof)
 \tf@lof=\write6
@@ -986,43 +994,50 @@ Rozdzia\PlPrIeC {\l } 4.
 
 
 
-[35
+[39
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 800--801
+Underfull \hbox (badness 10000) in paragraph at lines 861--862
 []\T1/cmr/m/n/12 GUVI, \T1/cmr/m/it/12 What is Plat-form In-de-pen-den-ce ^^U J
 a-va & .net ^^U "wri-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 800--801
+Underfull \hbox (badness 10000) in paragraph at lines 861--862
 \T1/cmr/m/it/12 te on-ce, run any-whe-re"\T1/cmr/m/n/12 , 2023, [][]$\T1/cmtt/m
 /n/12 https : / / www . guvi . in / blogs /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 800--801
+Underfull \hbox (badness 10000) in paragraph at lines 861--862
 \T1/cmtt/m/n/12 what-[]is-[]platform-[]independence-[]java-[]net-[]write-[]once
 -[]run-[]anywhere/$[][]\T1/cmr/m/n/12 ,
  []
 
 
 
-[36
+[40
 
 ] (./main.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
-Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 5F56B754BB2876EB784E16C768A7DAE7;7045.
+
+
+Package rerunfilecheck Warning: File `main.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `main.out':
+(rerunfilecheck)             Before: ED9A62AB9D94E2357615A79E0F59A5B5;6848
+(rerunfilecheck)             After:  DF6AA8C1848F1E9B1732307B71D1A8A9;6733.
  ) 
 Here is how much of TeX's memory you used:
- 15087 strings out of 473190
- 234320 string characters out of 5715800
+ 15093 strings out of 473190
+ 234368 string characters out of 5715800
  856013 words of memory out of 5000000
- 37757 multiletter control sequences out of 15000+600000
+ 37756 multiletter control sequences out of 15000+600000
  580665 words of font info for 77 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,13n,79p,983b,2013s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1046,10 +1061,10 @@ mf-dist/fonts/type1/public/cm-super/sfsx1728.pfb></usr/local/texlive/2025/texmf
 ist/fonts/type1/public/cm-super/sftt1000.pfb></usr/local/texlive/2025/texmf-dis
 t/fonts/type1/public/cm-super/sftt1095.pfb></usr/local/texlive/2025/texmf-dist/
 fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on main.pdf (36 pages, 699119 bytes).
+Output written on main.pdf (40 pages, 712997 bytes).
 PDF statistics:
- 811 PDF objects out of 1000 (max. 8388607)
- 719 compressed objects within 8 object streams
- 353 named destinations out of 1000 (max. 500000)
- 232 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 830 PDF objects out of 1000 (max. 8388607)
+ 734 compressed objects within 8 object streams
+ 360 named destinations out of 1000 (max. 500000)
+ 224 words of extra memory for PDF output out of 10000 (max. 10000000)
 
