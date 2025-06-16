@@ -254,7 +254,64 @@ Te kluczowe cechy czynią Javę językiem doskonale dopasowanym do wymagań nowo
 
 \section{Spring Boot jako główny framework projektu}
 
-Testowo cos innego
+Spring Boot to framework dla języka Java, który znacząco upraszcza tworzenie aplikacji webowych i serwerowych. Eliminuje konieczność skomplikowanych konfiguracji poprzez dostarczanie gotowych rozwiązań dla najczęstszych scenariuszy programistycznych. W projekcie Climatly Spring Boot pełni rolę kręgosłupa technologicznego, integrując wszystkie komponenty systemu w spójną całość i umożliwiając szybkie tworzenie zaawansowanych aplikacji serwerowych.
+
+Technologia ta ma ugruntowaną pozycję w świecie aplikacji korporacyjnych. Zgodnie z kompleksowym badaniem firmy Snyk — wiodącej platformy cyberbezpieczeństwa dla deweloperów — obejmującym ponad 2000 respondentów, dokładnie 60\% deweloperów wykorzystuje Spring Framework do tworzenia głównych aplikacji produkcyjnych~\cite{bib:snyk2020}. Ta dominacja w sektorze enterprise wynika z niezawodności, dojrzałości ekosystemu oraz silnego wsparcia społeczności, co czyni Spring Boot preferowanym wyborem dla aplikacji o krytycznym znaczeniu biznesowym.
+
+\subsection*{REST API --- uproszczenie implementacji}
+
+REST API (Representational State Transfer) to styl komunikacji między aplikacjami, który wykorzystuje protokół HTTP wraz z jego metodami (GET, POST, PUT, DELETE) do wykonywania operacji na zasobach reprezentowanych w standardowych formatach jak JSON. REST opiera się na bezstanowości, co oznacza, że każde żądanie zawiera wszystkie informacje niezbędne do jego przetworzenia, oraz na jednolitym interfejsie, który umożliwia intuicyjne zarządzanie zasobami poprzez URL-e.
+
+Spring Boot dostarcza wszystkie niezbędne narzędzia do efektywnego tworzenia REST API, dramatycznie upraszczając ten proces w porównaniu do tradycyjnych rozwiązań. Framework automatycznie włącza zaawansowane mechanizmy serializacji i deserializacji JSON poprzez Jackson, zarządza nagłówkami HTTP, zapewnia odpowiednie kody odpowiedzi oraz integruje walidację danych wejściowych z wykorzystaniem Bean Validation.
+
+Dzięki adnotacjom takim jak \texttt{@RestController}, \texttt{@GetMapping}, \texttt{@PostMapping} czy \texttt{@RequestMapping}, tworzenie endpointów REST staje się deklaratywne i wymaga minimalnej ilości kodu.
+
+\subsection*{Architektura Model-View-Controller (MVC)}
+
+Spring Boot implementuje wzorzec Model-View-Controller (MVC), który zapewnia jasną separację odpowiedzialności w aplikacji oraz przejrzystą strukturę kodu. W aplikacjach REST API, które nie posiadają tradycyjnej warstwy prezentacji, wzorzec MVC przyjmuje nieco zmodyfikowaną formę, gdzie kontroler odpowiada za obsługę żądań HTTP i zwracanie danych w formacie JSON, model reprezentuje strukturę przesyłanych danych, a logika biznesowa jest wydzielona do warstwy serwisów.
+
+W kontekście warstwy serwerowej projektu Climatly kontroler SensorController pełni rolę punktu wejścia dla wszystkich żądań związanych z czujnikami, definiując endpointy API i zarządzając przepływem danych. Warstwa serwisu zawiera całą logikę biznesową związaną z przetwarzaniem danych czujników, walidacją oraz orchestracją operacji na repozytoriach. Model reprezentuje strukturę danych przesyłanych między warstwami - zarówno encje bazodanowe jak Sensor, jak i obiekty DTO (Data Transfer Object) jak SensorResponse, które są dedykowane do komunikacji z klientem.
+
+\begin{lstfloat}[htbp]
+\begin{lstlisting}[language=java]
+@RestController
+@RequestMapping("/api/sensor")
+public class SensorController {
+
+    private final ISensorService sensorService;
+
+    @GetMapping("/{id}")
+    public ResponseEntity<SensorResponse> getSensorById(@PathVariable Short id) {
+        return ResponseEntity.ok(sensorService.getSensorById(id));
+    }
+}
+\end{lstlisting}
+\caption{Przykład kontrolera w architekturze MVC}
+\label{lst:sensor-controller-mvc}
+\end{lstfloat}
+
+\subsection*{Convention over Configuration - uproszczenie konfiguracji}
+
+Dependency Injection i Inversion of Control stanowią fundament modularnej architektury systemu Climatly, umożliwiając luźne powiązania między komponentami. Spring Boot automatycznie wstrzykuje zależności poprzez konstruktor, eliminując konieczność ręcznego tworzenia obiektów i zarządzania ich cyklem życia. Wzorzec ten znacząco ułatwia testowanie poprzez możliwość łatwego mockowania zależności oraz zwiększa czytelność kodu przez jasne definiowanie zależności w konstruktorze. Framework automatycznie zarządza całym cyklem życia obiektów - od ich utworzenia, przez wstrzyknięcie zależności, aż po prawidłowe zniszczenie przy zamykaniu aplikacji:
+
+\begin{lstfloat}[htbp]
+\begin{lstlisting}[language=java]
+@Service
+@RequiredArgsConstructor
+public class SensorService implements ISensorService {
+    private final SensorRepository sensorRepository;
+    private final SensorDataRepository sensorDataRepository;
+    private final SensorMapper sensorMapper;
+
+}
+\end{lstlisting}
+\caption{Przykład Dependency Injection w Spring Boot}
+\label{lst:dependency-injection}
+\end{lstfloat}
+
+\subsection*{Korzyści dla projektu Climatly}
+
+W kontekście projektu Climatly wybór Spring Boot przyniósł konkretne korzyści, które bezpośrednio wpłynęły na sukces implementacji. Framework umożliwił eliminację boilerplate code i automatyczną konfigurację, pozwalając na skupienie się na logice biznesowej zamiast na skomplikowanych ustawieniach infrastrukturalnych. Naturalne wsparcie dla modularności poprzez component scanning i package-based organization idealnie wpisało się w założenia architektoniczne systemu. Wbudowane mechanizmy automatycznego zarządzania transakcjami, serializacji JSON, walidacji danych oraz obsługi wyjątków znacząco przyspieszyły rozwój aplikacji, a natywne wsparcie dla Server-Sent Events umożliwiło implementację komunikacji w czasie rzeczywistym bez dodatkowych zależności. Dodatkowo, automatyczne mechanizmy task scheduling pozwoliły na eleganckie rozwiązanie problemu cyklicznej aktualizacji czujników, a integracja z wieloma bazami danych ułatwiła pracę z PostgreSQL i InfluxDB jednocześnie.
 
 \section{Wykorzystane systemy baz danych}
 W projekcie Climatly zastosowałem dwa komplementarne systemy baz danych: PostgreSQL jako tradycyjną bazę relacyjną oraz InfluxDB jako specjalistyczną bazę szeregów czasowych. Wybór dwóch różnych systemów bazodanowych nie był przypadkowy – wynikał z analizy specyficznych wymagań projektu oraz charakteru przetwarzanych danych.
@@ -858,6 +915,7 @@ Powyższa praca potwierdza, że kompleksowe podejście do dokumentacji projektó
 \addcontentsline{toc}{chapter}{Bibliografia}
 \bibitem{bib:vaadin2023} Vaadin, \textit{State of Java in the Enterprise Report}, 2023, \url{https://vaadin.com/blog/2023-trends-for-java-in-the-enterprise}, [dostęp: 05.05.2025].
 \bibitem{bib:oracle2023} Oracle, \textit{Java Documentation - Get Started}, 2023, \url{https://docs.oracle.com/en/java/}, [dostęp: 05.05.2025].
+\bibitem{bib:snyk2020} Snyk, \textit{Spring dominates the Java ecosystem with 60\% using it for their main applications}, 2020, \url{https://snyk.io/blog/spring-dominates-the-java-ecosystem-with-60-using-it-for-their-main-applications/}, [dostęp: 16.06.2025].
 \bibitem{bib:guvi2023} GUVI, \textit{What is Platform Independence – Java \& .net – "write once, run anywhere"}, 2023, \url{https://www.guvi.in/blogs/what-is-platform-independence-java-net-write-once-run-anywhere/}, [dostęp: 05.05.2025].
 \bibitem{bib:fielding2000} Roy T. Fielding, \textit{Architectural Styles and the Design of Network-based Software Architectures}, 2000, \url{https://ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm}, [dostęp: 05.05.2025].
 \bibitem{bib:htmx2023} Carson Gross, \textit{REST - Explained For Beginners}, 2023, \url{https://htmx.org/essays/rest-explained/}, [dostęp: 05.05.2025].

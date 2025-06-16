@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.4.19)  16 JUN 2025 20:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.4.19)  16 JUN 2025 22:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -679,11 +679,31 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [13]
 
-[14]
+LaTeX Warning: Citation `bib:snyk2020' on page 14 undefined on input line 259.
+
+
+
+[14] (/usr/local/texlive/2025/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2024/09/23 1.10c listings language file
+)
+Overfull \hbox (71.66736pt too wide) in paragraph at lines 284--285
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+Package hyperref Info: bookmark level for unknown lstfloat defaults to 0 on inp
+ut line 289.
+
 
 [15]
+Underfull \vbox (badness 7777) has occurred while \output is active []
 
-[16] (/usr/local/texlive/2025/texmf-dist/tex/latex/listings/lstlang1.sty
+
+
+[16]
+
+[17]
+
+[18] (/usr/local/texlive/2025/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2024/09/23 1.10c listings language file
 )
 (/usr/local/texlive/2025/texmf-dist/tex/latex/listings/lstlang2.sty
@@ -699,7 +719,7 @@ See the Listings package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.328 \begin{lstlisting}[language=yaml]
+l.385 \begin{lstlisting}[language=yaml]
                                        
 The following languages weren't loadable:
     ,yaml$
@@ -712,24 +732,24 @@ See the Listings package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.328 \begin{lstlisting}[language=yaml]
+l.385 \begin{lstlisting}[language=yaml]
                                        
 The language is not loadable. Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-Package hyperref Info: bookmark level for unknown lstfloat defaults to 0 on inp
-ut line 360.
 
 
-[17]
+[19]
 
-[18] (/usr/local/texlive/2025/texmf-dist/tex/latex/listings/lstlang1.sty
+[20]
+
+[21] (/usr/local/texlive/2025/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2024/09/23 1.10c listings language file
 )
 (/usr/local/texlive/2025/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2024/09/23 1.10c (Carsten Heinz)
 )
-Overfull \hbox (115.75702pt too wide) in paragraph at lines 382--383
+Overfull \hbox (115.75702pt too wide) in paragraph at lines 439--440
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
@@ -738,15 +758,13 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
-[19
+[22
 
-] (/usr/local/texlive/2025/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2024/09/23 1.10c listings language file
-)
+]
 
-[20]
+[23]
 
-[21] (/usr/local/texlive/2025/texmf-dist/tex/latex/listings/lstlang1.sty
+[24] (/usr/local/texlive/2025/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2024/09/23 1.10c listings language file
 )
 (/usr/local/texlive/2025/texmf-dist/tex/latex/listings/lstlang2.sty
@@ -762,7 +780,7 @@ See the Listings package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.468 \begin{lstlisting}[language=yaml]
+l.525 \begin{lstlisting}[language=yaml]
                                        
 The following languages weren't loadable:
     ,yaml$
@@ -775,31 +793,31 @@ See the Listings package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.468 \begin{lstlisting}[language=yaml]
+l.525 \begin{lstlisting}[language=yaml]
                                        
 The language is not loadable. Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-<swagger.png, id=377, 581.17125pt x 699.61375pt>
+<swagger.png, id=417, 581.17125pt x 699.61375pt>
 File: swagger.png Graphic file (type png)
 <use swagger.png>
-Package pdftex.def Info: swagger.png  used on input line 491.
+Package pdftex.def Info: swagger.png  used on input line 548.
 (pdftex.def)             Requested size: 394.65901pt x 475.10123pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
-[22]
+[25]
 
-[23 <./swagger.png>]
+[26 <./swagger.png>]
 Rozdzia\PlPrIeC {\l } 3.
 
 
-[24
+[27
 
 ]
-Overfull \hbox (65.36884pt too wide) in paragraph at lines 555--556
+Overfull \hbox (65.36884pt too wide) in paragraph at lines 612--613
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
@@ -808,21 +826,21 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
-[25]
+[28]
 
-[26]
-Overfull \hbox (14.98065pt too wide) in paragraph at lines 589--590
+[29]
+Overfull \hbox (14.98065pt too wide) in paragraph at lines 646--647
 [][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (2.3836pt too wide) in paragraph at lines 594--595
+Overfull \hbox (2.3836pt too wide) in paragraph at lines 651--652
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ] 
  []
 
 
-Overfull \hbox (77.96588pt too wide) in paragraph at lines 599--600
+Overfull \hbox (77.96588pt too wide) in paragraph at lines 656--657
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][] 
  []
@@ -832,60 +850,60 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
-[27]
-Overfull \hbox (96.86145pt too wide) in paragraph at lines 644--645
+[30]
+Overfull \hbox (96.86145pt too wide) in paragraph at lines 701--702
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ] 
  []
 
 
-Overfull \hbox (65.36884pt too wide) in paragraph at lines 648--649
+Overfull \hbox (65.36884pt too wide) in paragraph at lines 705--706
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (128.35406pt too wide) in paragraph at lines 649--650
+Overfull \hbox (128.35406pt too wide) in paragraph at lines 706--707
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
 
-[28]
-Overfull \hbox (134.65259pt too wide) in paragraph at lines 673--674
+[31]
+Overfull \hbox (134.65259pt too wide) in paragraph at lines 730--731
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (65.36884pt too wide) in paragraph at lines 687--688
+Overfull \hbox (65.36884pt too wide) in paragraph at lines 744--745
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (77.96588pt too wide) in paragraph at lines 690--691
+Overfull \hbox (77.96588pt too wide) in paragraph at lines 747--748
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][] 
  []
 
 
 
-[29]
-Overfull \hbox (122.05554pt too wide) in paragraph at lines 693--694
+[32]
+Overfull \hbox (122.05554pt too wide) in paragraph at lines 750--751
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (27.5777pt too wide) in paragraph at lines 694--695
+Overfull \hbox (27.5777pt too wide) in paragraph at lines 751--752
 [][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (166.1452pt too wide) in paragraph at lines 699--700
+Overfull \hbox (166.1452pt too wide) in paragraph at lines 756--757
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][] 
  []
 
 
-Overfull \hbox (109.4585pt too wide) in paragraph at lines 707--708
+Overfull \hbox (109.4585pt too wide) in paragraph at lines 764--765
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][] 
  []
@@ -897,7 +915,7 @@ See the caption package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.719 \caption
+l.776 \caption
               {Klasa Scheduler zarządzająca harmonogramem zadań cyklicznych}
 
 If you do not understand this error, please take a closer look
@@ -908,77 +926,77 @@ If that doesn't work, type  X <return>  to quit.
 
 
 
-[30]
+[33]
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 730.
+nput line 787.
 
-Overfull \hbox (27.5777pt too wide) in paragraph at lines 738--739
+Overfull \hbox (27.5777pt too wide) in paragraph at lines 795--796
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (14.98065pt too wide) in paragraph at lines 740--741
+Overfull \hbox (14.98065pt too wide) in paragraph at lines 797--798
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (77.96588pt too wide) in paragraph at lines 742--743
+Overfull \hbox (77.96588pt too wide) in paragraph at lines 799--800
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ] 
  []
 
 
-Overfull \hbox (59.07031pt too wide) in paragraph at lines 743--744
+Overfull \hbox (59.07031pt too wide) in paragraph at lines 800--801
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (65.36884pt too wide) in paragraph at lines 744--745
+Overfull \hbox (65.36884pt too wide) in paragraph at lines 801--802
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][] 
  []
 
 
-Overfull \hbox (46.47327pt too wide) in paragraph at lines 745--746
+Overfull \hbox (46.47327pt too wide) in paragraph at lines 802--803
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ] 
  []
 
 
-Overfull \hbox (59.07031pt too wide) in paragraph at lines 746--747
+Overfull \hbox (59.07031pt too wide) in paragraph at lines 803--804
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][] 
  []
 
 
-Overfull \hbox (84.2644pt too wide) in paragraph at lines 753--754
+Overfull \hbox (84.2644pt too wide) in paragraph at lines 810--811
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (46.47327pt too wide) in paragraph at lines 756--757
+Overfull \hbox (46.47327pt too wide) in paragraph at lines 813--814
 [][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
 
-[31]
+[34]
 Rozdzia\PlPrIeC {\l } 4.
 
 
-[32
+[35
 
 ]
 
-[33]
-
-[34]
-
-[35]
-
 [36]
 
-[37
+[37]
+
+[38]
+
+[39]
+
+[40
 
 ] (./main.lolst)
 \tf@lolst=\write5
@@ -986,7 +1004,7 @@ Rozdzia\PlPrIeC {\l } 4.
 
 
 
-[38
+[41
 
 ] (./main.lof)
 \tf@lof=\write6
@@ -994,29 +1012,47 @@ Rozdzia\PlPrIeC {\l } 4.
 
 
 
-[39
+[42
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 861--862
+Underfull \hbox (badness 10000) in paragraph at lines 918--919
+[]\T1/cmr/m/n/12 Snyk, \T1/cmr/m/it/12 Spring do-mi-na-tes the Ja-va eco-sys-te
+m with 60% using
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 918--919
+\T1/cmr/m/it/12 it for the-ir ma-in ap-pli-ca-tions\T1/cmr/m/n/12 , 2020, [][]$
+\T1/cmtt/m/n/12 https : / / snyk . io / blog /
+ []
+
+
+Overfull \hbox (94.95119pt too wide) in paragraph at lines 918--919
+\T1/cmtt/m/n/12 spring-[]dominates-[]the-[]java-[]ecosystem-[]with-[]60-[]using
+-[]it-[]for-[]their-[]main-[]applications/$[][]\T1/cmr/m/n/12 ,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 919--920
 []\T1/cmr/m/n/12 GUVI, \T1/cmr/m/it/12 What is Plat-form In-de-pen-den-ce ^^U J
 a-va & .net ^^U "wri-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 861--862
+Underfull \hbox (badness 10000) in paragraph at lines 919--920
 \T1/cmr/m/it/12 te on-ce, run any-whe-re"\T1/cmr/m/n/12 , 2023, [][]$\T1/cmtt/m
 /n/12 https : / / www . guvi . in / blogs /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 861--862
+Underfull \hbox (badness 10000) in paragraph at lines 919--920
 \T1/cmtt/m/n/12 what-[]is-[]platform-[]independence-[]java-[]net-[]write-[]once
 -[]run-[]anywhere/$[][]\T1/cmr/m/n/12 ,
  []
 
 
 
-[40
+[43
 
 ] (./main.aux)
  ***********
@@ -1025,22 +1061,22 @@ L3 programming layer <2025-01-18>
  ***********
 
 
-Package rerunfilecheck Warning: File `main.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
+LaTeX Warning: There were undefined references.
 
-Package rerunfilecheck Info: Checksums for `main.out':
-(rerunfilecheck)             Before: ED9A62AB9D94E2357615A79E0F59A5B5;6848
-(rerunfilecheck)             After:  DF6AA8C1848F1E9B1732307B71D1A8A9;6733.
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: 44C6D0F900534846A5E6E3F023602F78;6733.
  ) 
 Here is how much of TeX's memory you used:
- 15093 strings out of 473190
- 234368 string characters out of 5715800
- 856013 words of memory out of 5000000
- 37756 multiletter control sequences out of 15000+600000
+ 15181 strings out of 473190
+ 235762 string characters out of 5715800
+ 856816 words of memory out of 5000000
+ 37813 multiletter control sequences out of 15000+600000
  580665 words of font info for 77 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,13n,79p,983b,2013s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,13n,79p,1092b,2013s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb>
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></
 usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></us
@@ -1061,10 +1097,10 @@ mf-dist/fonts/type1/public/cm-super/sfsx1728.pfb></usr/local/texlive/2025/texmf
 ist/fonts/type1/public/cm-super/sftt1000.pfb></usr/local/texlive/2025/texmf-dis
 t/fonts/type1/public/cm-super/sftt1095.pfb></usr/local/texlive/2025/texmf-dist/
 fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on main.pdf (40 pages, 712997 bytes).
+Output written on main.pdf (43 pages, 724341 bytes).
 PDF statistics:
- 830 PDF objects out of 1000 (max. 8388607)
- 734 compressed objects within 8 object streams
- 360 named destinations out of 1000 (max. 500000)
+ 882 PDF objects out of 1000 (max. 8388607)
+ 783 compressed objects within 8 object streams
+ 391 named destinations out of 1000 (max. 500000)
  224 words of extra memory for PDF output out of 10000 (max. 10000000)
 
