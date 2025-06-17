@@ -127,8 +127,6 @@ System Climatly to kompleksowe rozwiązanie umożliwiające monitoring parametr�
 
 \section{Koncepcja systemu Climatly oraz jego komponenty zewnętrzne}
 
-System Climatly to kompleksowe rozwiązanie umożliwiające monitoring parametrów środowiskowych poprzez sieć rozproszonych czujników meteorologicznych. Celem systemu jest gromadzenie, przetwarzanie i udostępnianie danych pogodowych w formie przyjaznej dla użytkownika końcowego.
-
 Ekosystem Climatly składa się z następujących komponentów:
 
 \begin{itemize}
@@ -200,7 +198,7 @@ Poniżej znajduje się diagram ilustrujący podział warstwy serwerowej na modu�
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{Climatly-modules.pdf}
-    \caption{Schemat modułów warstwy serwerowej systemu Climatly}
+    \caption{Schemat modułów warstwy serwerowej systemu Climatly (opracowanie własne)}
     \label{fig:moduly---systemu}
 \end{figure}
 
@@ -212,26 +210,25 @@ Dążyłem do stworzenia systemu, w którym poszczególne warstwy i moduły funk
 
 \section{Java jako język programowania dla aplikacji backendowych}
 
-W nowoczesnej architekturze aplikacji, warstwa backendowa odpowiada za przetwarzanie danych, implementację logiki biznesowej oraz komunikację z bazami danych. Współcześnie, dominującym standardem implementacji interfejsów backendowych stał się REST API (Representational State Transfer), który wykorzystuje protokół HTTP do komunikacji między klientem a serwerem, zapewniając skalowalność i elastyczność systemów rozproszonych [1].
-
-Jako język programowania warstwy backendowej wybrałem Javę, która dzięki swoim unikalnym właściwościom, stała się jednym z wiodących języków w obszarze tworzenia warstw serwerowych, szczególnie w sektorze aplikacji korporacyjnych. Według raportu State of Java in the Enterprise, aż 70\% organizacji buduje nowe aplikacje pełnostackowe w Javie [2]. Ta silna pozycja wynika z kilku kluczowych cech tego języka, które okazały się wyjątkowo przydatne w moim projekcie:
+Jako język programowania warstwy backendowej wybrałem Javę, która dzięki swoim unikalnym właściwościom, stała się jednym z wiodących języków w obszarze tworzenia warstw serwerowych, szczególnie w sektorze aplikacji korporacyjnych. Według raportu State of Java in the Enterprise, aż 69\% organizacji buduje nowe aplikacje backendowe w Javie~\cite{bib:vaadin2023}. Ta silna pozycja wynika z kilku kluczowych cech tego języka, które okazały się wyjątkowo przydatne w moim projekcie:
 
 \subsection*{Obiektowość}
 
-Java to w pełni obiektowy język programowania, którego fundamenty opierają się na czterech głównych filarach koncepcji obiektowych: abstrakcji, hermetyzacji, dziedziczeniu i polimorfizmie. Obiektowość w Javie nie jest jedynie dodatkiem do języka, ale jego integralną częścią, co pozwala na tworzenie bardziej modularnego, skalowalnego i łatwiejszego w utrzymaniu kodu GeeksforGeeks, 2023 GeeksforGeeks.
-Abstrakcja pozwala na ukrycie wewnętrznej złożoności systemu, eksponując jedynie niezbędne detale. Hermetyzacja (enkapsulacja) umożliwia ochronę danych poprzez ich ukrycie wewnątrz klasy i udostępnianie jedynie za pomocą kontrolowanych metod dostępowych. Dziedziczenie wspomaga wielokrotne wykorzystanie kodu poprzez tworzenie hierarchii klas, gdzie klasy potomne dziedziczą cechy i zachowania klas nadrzędnych. Polimorfizm zaś pozwala na wykorzystanie jednego interfejsu do różnych implementacji, co znacząco zwiększa elastyczność systemu Raygun, 2023
+Java to w pełni obiektowy język programowania, którego fundamenty opierają się na czterech głównych filarach koncepcji obiektowych: abstrakcji, hermetyzacji, dziedziczeniu i polimorfizmie. Obiektowość w Javie nie jest jedynie dodatkiem do języka, ale jego integralną częścią, co pozwala na tworzenie bardziej modularnego, skalowalnego i łatwiejszego w utrzymaniu kodu.
+
+Abstrakcja pozwala na ukrycie wewnętrznej złożoności systemu, eksponując jedynie niezbędne detale. Hermetyzacja (enkapsulacja) umożliwia ochronę danych poprzez ich ukrycie wewnątrz klasy i udostępnianie jedynie za pomocą kontrolowanych metod dostępowych. Dziedziczenie wspomaga wielokrotne wykorzystanie kodu poprzez tworzenie hierarchii klas, gdzie klasy potomne dziedziczą cechy i zachowania klas nadrzędnych. Polimorfizm zaś pozwala na wykorzystanie jednego interfejsu do różnych implementacji, co znacząco zwiększa elastyczność systemu~\cite{bib:geeksforgeeks2023oop}.
 
 \subsection*{Wieloplatformowość}
 
-Jedną z najbardziej charakterystycznych cech Javy jest jej niezależność od platformy sprzętowej i systemowej. Zasada „write once, run anywhere" umożliwia uruchamianie tego samego kodu na różnych systemach operacyjnych bez konieczności rekompilacji~\cite{bib:guvi2023}. Jest to możliwe dzięki Wirtualnej Maszynie Javy (JVM), która zapewnia warstwę abstrakcji między kodem aplikacji a systemem operacyjnym. W środowiskach korporacyjnych, gdzie często występuje heterogeniczna infrastruktura, ta cecha pozwala na znaczące obniżenie kosztów wdrożenia i utrzymania aplikacji.
+Jedną z najbardziej charakterystycznych cech Javy jest jej niezależność od platformy sprzętowej i systemowej. Zasada „write once, run anywhere" (WORA) umożliwia uruchamianie tego samego kodu na różnych systemach operacyjnych bez konieczności rekompilacji~\cite{bib:geeksforgeeks2023wora}. Jest to możliwe dzięki Wirtualnej Maszynie Javy (JVM), która zapewnia warstwę abstrakcji między kodem aplikacji a systemem operacyjnym. W środowiskach korporacyjnych, gdzie często występuje heterogeniczna infrastruktura, ta cecha pozwala na znaczące obniżenie kosztów wdrożenia i utrzymania aplikacji.
 
 \subsection*{Wydajność i skalowalność}
 
-Java oferuje zaawansowane mechanizmy do obsługi wielowątkowości i przetwarzania współbieżnego, co jest kluczowe dla wysokowydajnych aplikacji backendowych. Wprowadzone w Javie 21 wirtualne wątki umożliwiają efektywną obsługę tysięcy równoczesnych połączeń, co jest niezbędne w systemach REST API o dużym obciążeniu. Dodatkowo, zaawansowane mechanizmy optymalizacji w JVM zapewniają wysoką wydajność aplikacji przy zachowaniu wszystkich zalet języka wysokiego poziomu.
+Java oferuje zaawansowane mechanizmy do obsługi wielowątkowości i przetwarzania współbieżnego, co jest kluczowe dla wysokowydajnych aplikacji backendowych. Wprowadzone w Javie 21 wirtualne wątki umożliwiają efektywną obsługę tysięcy równoczesnych połączeń, co jest niezbędne w systemach z otwarym dostępem o dużym obciążeniu~\cite{bib:oracle2023virtual}. Dodatkowo, zaawansowane mechanizmy optymalizacji w JVM zapewniają wysoką wydajność aplikacji przy zachowaniu wszystkich zalet języka wysokiego poziomu.
 
-Istotnym elementem wydajności Javy jest automatyczne zarządzanie pamięcią, realizowane przez moduł zwany Garbage Collector (GC). W przeciwieństwie do innych języków programowania, jak C czy C++, programista Javy nie musi ręcznie alokować i zwalniać pamięci, co eliminuje wiele potencjalnych błędów związanych z wyciekami pamięci. Garbage Collector automatycznie identyfikuje obiekty, które nie są już używane i zwalnia zajmowaną przez nie pamięć, co zwiększa stabilność aplikacji działających przez długi czas.
+Istotnym elementem wydajności Javy jest automatyczne zarządzanie pamięcią, realizowane przez moduł zwany Garbage Collector (GC). W przeciwieństwie do innych języków programowania, jak C czy C++, programista Javy nie musi ręcznie alokować i zwalniać pamięci, co eliminuje wiele potencjalnych błędów związanych z wyciekami pamięci. Garbage Collector automatycznie identyfikuje obiekty, które nie są już używane i zwalnia zajmowaną przez nie pamięć, co zwiększa stabilność aplikacji działających przez długi czas~\cite{bib:oracle2023gc}.
 
-Skalowalność aplikacji Java wynika również z możliwości efektywnego wykorzystania zasobów sprzętowych. JVM automatycznie dostosowuje się do dostępnej pamięci i liczby procesorów, co pozwala na optymalne działanie zarówno na małych urządzeniach, jak i na potężnych serwerach.
+Skalowalność aplikacji Java wynika również z możliwości efektywnego wykorzystania zasobów sprzętowych. JVM automatycznie dostosowuje się do dostępnej pamięci i liczby procesorów, co pozwala na optymalne działanie zarówno na małych urządzeniach, jak i na potężnych serwerach~\cite{bib:boringowl2023jvm}.
 
 \subsection*{Dojrzałość}
 
@@ -239,7 +236,7 @@ Java istnieje na rynku od ponad 25 lat, co czyni ją jednym z najbardziej ugrunt
 
 Jedną z kluczowych zalet Javy w kontekście jej dojrzałości jest jej kompatybilność wsteczna. Kod napisany w starszych wersjach języka działa bez modyfikacji w nowszych wersjach, co minimalizuje koszty migracji i pozwala na ochronę dotychczasowych inwestycji w oprogramowanie. Ta cecha ma szczególne znaczenie w projektach długoterminowych, gdzie stabilność platformy jest priorytetem.
 
-Mimo wspomnianiej kompatybilności wstecznej, Oracle regularnie wydaje nowe wersje Javy, wprowadzając innowacyjne rozwiązania przy jednoczesnym zachowaniu stabilności. W obecnym modelu wydawniczym, niektóre wersje otrzymują status LTS (Long---Term Support), co gwarantuje im długoterminowe wsparcie techniczne i aktualizacje bezpieczeństwa. Wsparcie dla wersji LTS może trwać nawet ponad dekadę --- przykładowo Java 8 będzie wspierana do 2030 roku. Ta przewidywalność cyklu życia jest nieoceniona w środowiskach korporacyjnych, gdzie nagłe zmiany technologiczne mogą generować znaczące ryzyko operacyjne
+Mimo wspomnianiej kompatybilności wstecznej, Oracle regularnie wydaje nowe wersje Javy, wprowadzając innowacyjne rozwiązania przy jednoczesnym zachowaniu stabilności. W obecnym modelu wydawniczym, niektóre wersje otrzymują status LTS (Long-Term Support), co gwarantuje im długoterminowe wsparcie techniczne i aktualizacje bezpieczeństwa. Wsparcie dla wersji LTS może trwać nawet ponad dekadę --- przykładowo Java 8 będzie wspierana do 2030 roku. Ta przewidywalność cyklu życia jest nieoceniona w środowiskach korporacyjnych, gdzie nagłe zmiany technologiczne mogą generować znaczące ryzyko operacyjne~\cite{bib:oracle2023lts}.
 
 \subsection*{Bogaty ekosystem narzędzi}
 
@@ -260,17 +257,15 @@ Technologia ta ma ugruntowaną pozycję w świecie aplikacji korporacyjnych. Zgo
 
 \subsection*{REST API --- uproszczenie implementacji}
 
-REST API (Representational State Transfer) to styl komunikacji między aplikacjami, który wykorzystuje protokół HTTP wraz z jego metodami (GET, POST, PUT, DELETE) do wykonywania operacji na zasobach reprezentowanych w standardowych formatach jak JSON. REST opiera się na bezstanowości, co oznacza, że każde żądanie zawiera wszystkie informacje niezbędne do jego przetworzenia, oraz na jednolitym interfejsie, który umożliwia intuicyjne zarządzanie zasobami poprzez URL-e.
+REST API (Representational State Transfer) to styl komunikacji między aplikacjami, który wykorzystuje protokół HTTP wraz z jego metodami (GET, POST, PUT, DELETE) do wykonywania operacji na zasobach reprezentowanych w standardowych formatach jak JSON (JavaScript Object Notation). REST opiera się na bezstanowości, co oznacza, że każde żądanie zawiera wszystkie informacje niezbędne do jego przetworzenia, oraz na jednolitym interfejsie, który umożliwia intuicyjne zarządzanie zasobami poprzez URL-e~\cite{bib:ibm2024}.
 
-Spring Boot dostarcza wszystkie niezbędne narzędzia do efektywnego tworzenia REST API, dramatycznie upraszczając ten proces w porównaniu do tradycyjnych rozwiązań. Framework automatycznie włącza zaawansowane mechanizmy serializacji i deserializacji JSON poprzez Jackson, zarządza nagłówkami HTTP, zapewnia odpowiednie kody odpowiedzi oraz integruje walidację danych wejściowych z wykorzystaniem Bean Validation.
-
-Dzięki adnotacjom takim jak \texttt{@RestController}, \texttt{@GetMapping}, \texttt{@PostMapping} czy \texttt{@RequestMapping}, tworzenie endpointów REST staje się deklaratywne i wymaga minimalnej ilości kodu.
+Spring Boot dostarcza wszystkie niezbędne narzędzia do efektywnego tworzenia REST API, dramatycznie upraszczając ten proces w porównaniu do tradycyjnych rozwiązań. Framework automatycznie włącza zaawansowane mechanizmy serializacji i deserializacji JSON poprzez Jackson, zarządza nagłówkami HTTP, zapewnia odpowiednie kody odpowiedzi oraz integruje walidację danych wejściowych z wykorzystaniem Bean Validation. Dzięki adnotacjom takim jak \texttt{@RestController}, \texttt{@GetMapping}, \texttt{@PostMapping} czy \texttt{@RequestMapping}, tworzenie endpointów REST staje się deklaratywne i wymaga minimalnej ilości kodu~\cite{bib:baeldung2023rest}.
 
 \subsection*{Architektura Model-View-Controller (MVC)}
 
 Spring Boot implementuje wzorzec Model-View-Controller (MVC), który zapewnia jasną separację odpowiedzialności w aplikacji oraz przejrzystą strukturę kodu. W aplikacjach REST API, które nie posiadają tradycyjnej warstwy prezentacji, wzorzec MVC przyjmuje nieco zmodyfikowaną formę, gdzie kontroler odpowiada za obsługę żądań HTTP i zwracanie danych w formacie JSON, model reprezentuje strukturę przesyłanych danych, a logika biznesowa jest wydzielona do warstwy serwisów.
 
-W kontekście warstwy serwerowej projektu Climatly kontroler SensorController pełni rolę punktu wejścia dla wszystkich żądań związanych z czujnikami, definiując endpointy API i zarządzając przepływem danych. Warstwa serwisu zawiera całą logikę biznesową związaną z przetwarzaniem danych czujników, walidacją oraz orchestracją operacji na repozytoriach. Model reprezentuje strukturę danych przesyłanych między warstwami - zarówno encje bazodanowe jak Sensor, jak i obiekty DTO (Data Transfer Object) jak SensorResponse, które są dedykowane do komunikacji z klientem.
+W kontekście warstwy serwerowej projektu Climatly kontroler SensorController pełni rolę punktu wejścia dla wszystkich żądań związanych z czujnikami, definiując endpointy API i zarządzając przepływem danych. Warstwa serwisu zawiera całą logikę biznesową związaną z przetwarzaniem danych czujników, walidacją oraz orchestracją operacji na repozytoriach. Model reprezentuje strukturę danych przesyłanych między warstwami - zarówno encje bazodanowe jak Sensor, jak i obiekty DTO (Data Transfer Object) jak SensorResponse, które są dedykowane do komunikacji z klientem~\cite{bib:baeldung2023mvc}.
 
 \begin{lstfloat}[htbp]
 \begin{lstlisting}[language=java]
@@ -292,7 +287,7 @@ public class SensorController {
 
 \subsection*{Convention over Configuration - uproszczenie konfiguracji}
 
-Dependency Injection i Inversion of Control stanowią fundament modularnej architektury systemu Climatly, umożliwiając luźne powiązania między komponentami. Spring Boot automatycznie wstrzykuje zależności poprzez konstruktor, eliminując konieczność ręcznego tworzenia obiektów i zarządzania ich cyklem życia. Wzorzec ten znacząco ułatwia testowanie poprzez możliwość łatwego mockowania zależności oraz zwiększa czytelność kodu przez jasne definiowanie zależności w konstruktorze. Framework automatycznie zarządza całym cyklem życia obiektów - od ich utworzenia, przez wstrzyknięcie zależności, aż po prawidłowe zniszczenie przy zamykaniu aplikacji:
+Dependency Injection i Inversion of Control stanowią fundament modularnej architektury systemu Climatly, umożliwiając luźne powiązania między komponentami. Spring Boot automatycznie wstrzykuje zależności poprzez konstruktor, eliminując konieczność ręcznego tworzenia obiektów i zarządzania ich cyklem życia. Wzorzec ten znacząco ułatwia testowanie poprzez możliwość łatwego mockowania zależności oraz zwiększa czytelność kodu przez jasne definiowanie zależności w konstruktorze. Framework automatycznie zarządza całym cyklem życia obiektów - od ich utworzenia, przez wstrzyknięcie zależności, aż po prawidłowe zniszczenie przy zamykaniu aplikacji~\cite{bib:baeldung2023ioc}.
 
 \begin{lstfloat}[htbp]
 \begin{lstlisting}[language=java]
@@ -316,7 +311,7 @@ W kontekście projektu Climatly wybór Spring Boot przyniósł konkretne korzyś
 \section{Wykorzystane systemy baz danych}
 W projekcie Climatly zastosowałem dwa komplementarne systemy baz danych: PostgreSQL jako tradycyjną bazę relacyjną oraz InfluxDB jako specjalistyczną bazę szeregów czasowych. Wybór dwóch różnych systemów bazodanowych nie był przypadkowy – wynikał z analizy specyficznych wymagań projektu oraz charakteru przetwarzanych danych.
 \subsection*{PostgreSQL --- relacyjna baza metadanych}
-PostgreSQL to zaawansowany, otwartoźródłowy system zarządzania relacyjnymi bazami danych (RDBMS), który w projekcie Climatly pełni rolę głównego repozytorium metadanych czujników. Wybór PostgreSQL był podyktowany kilkoma kluczowymi czynnikami:
+PostgreSQL to zaawansowany, otwartoźródłowy system zarządzania relacyjnymi bazami danych (RDBMS), który w projekcie Climatly pełni rolę głównego repozytorium metadanych czujników~\cite{bib:aws2023postgresql}. Wybór PostgreSQL był podyktowany kilkoma kluczowymi czynnikami:
 
 \begin{itemize}
   \item \textbf{Integralność danych} --- PostgreSQL oferuje pełne wsparcie dla ACID (Atomicity, Consistency, Isolation, Durability), co zapewnia spójność danych nawet w przypadku awarii systemu. Jest to krytyczne dla danych kontekstowych, takich jak lokalizacje czujników czy ich statusy operacyjne.
@@ -325,7 +320,7 @@ PostgreSQL to zaawansowany, otwartoźródłowy system zarządzania relacyjnymi b
 \end{itemize}
 
 \subsection*{InfluxDB --- nierelacyjna baza szeregów czasowych}
-InfluxDB to wyspecjalizowana, nierelacyjna baza danych zaprojektowana do efektywnego przechowywania i analizy danych szeregów czasowych. W projekcie Climatly pełni ona rolę repozytorium przechowującego surowe odczyty z czujników. Wykorzystanie InfluxDB było zdeterminowane następującymi czynnikami:
+InfluxDB to wyspecjalizowana, nierelacyjna baza danych zaprojektowana do efektywnego przechowywania i analizy danych szeregów czasowych~\cite{bib:influxdb2023}. W projekcie Climatly pełni ona rolę repozytorium przechowującego surowe odczyty z czujników. Wykorzystanie InfluxDB było zdeterminowane następującymi czynnikami:
 
 \begin{itemize}
   \item \textbf{Optymalizacja pod kątem szeregów czasowych} --- InfluxDB jest zoptymalizowana pod kątem przechowywania i przetwarzania dużych wolumenów danych uporządkowanych chronologicznie, co idealnie odpowiada charakterowi odczytów z czujników meteorologicznych.
@@ -379,7 +374,7 @@ W projekcie Climatly, oprócz podstawowych technologii takich jak Java, Spring B
 
 Rola Dockera w nowoczesnym procesie wytwarzania oprogramowania jest niezastąpiona. Docker to platforma umożliwiająca tworzenie, wdrażanie i uruchamianie aplikacji w kontenerach, które zawierają wszystkie niezbędne zależności i biblioteki potrzebne do działania aplikacji. Kontenery te są lekkie, przenośne i izolowane od systemu operacyjnego, co umożliwia spójne działanie aplikacji niezależnie od środowiska.
 
-W pracy developerskiej wykorzystałem Docker Compose, który doskonale integruje się ze Spring Bootem i umożliwia szybkie przygotowanie lokalnego środowiska deweloperskiego. Docker Compose pozwolił mi na tworzenie i zarządzanie wieloma kontenerami jednocześnie, definiując całą infrastrukturę jako kod. Dzięki temu mogłem zdefiniować zarówno bazę PostgreSQL, jak i InfluxDB w jednym pliku konfiguracyjnym:
+W pracy developerskiej wykorzystałem Docker Compose, który doskonale integruje się ze Spring Bootem i umożliwia szybkie przygotowanie lokalnego środowiska deweloperskiego~\cite{bib:docker2023}. Docker Compose pozwolił mi na tworzenie i zarządzanie wieloma kontenerami jednocześnie, definiując całą infrastrukturę jako kod. Dzięki temu mogłem zdefiniować zarówno bazę PostgreSQL, jak i InfluxDB w jednym pliku konfiguracyjnym:
 
 \begin{lstfloat}[htbp]
 \begin{lstlisting}[language=yaml]
@@ -420,14 +415,14 @@ services:
 
 Kluczową zaletą tego rozwiązania jest możliwość przechowywania danych bez ingerencji w środowisko produkcyjne, co pozwoliło mi na swobodne eksperymentowanie, testowanie zmian i rozwijanie funkcjonalności bez ryzyka uszkodzenia danych produkcyjnych.
 
-Najważniejszym elementem konteneryzacji dla środowiska produkcyjnego jest Dockerfile, który definiuje wszystkie procesy niezbędne do uruchomienia aplikacji na docelowej infrastrukturze, niezależnie czy będzie to Kubernetes (K8s), czy AWS Elastic Container Service (ECS) w razie potrzeby przeniesienie backendu na zupełnie nową infrastrukturę. Ten Dockerfile automatyzuje proces budowania i wdrażania aplikacji, co znacząco upraszcza konfigurację środowiska produkcyjnego i minimalizuje ryzyko błędów związanych z różnicami między środowiskami.
+Najważniejszym elementem konteneryzacji dla środowiska produkcyjnego jest Dockerfile, który definiuje wszystkie procesy niezbędne do uruchomienia aplikacji na docelowej infrastrukturze, niezależnie czy będzie to Kubernetes (K8s), czy AWS Elastic Container Service (ECS) w razie potrzeby przeniesienie backendu na zupełnie nową infrastrukturę. Ten Dockerfile automatyzuje proces budowania oraz wdrażania, co znacząco minimalizuje ryzyko błędów związanych z różnicami między środowiskami.
 
 
 \clearpage
 
 \subsection*{Liquibase - zarządzanie zmianami schematu bazy danych}
 
-Liquibase to narzędzie open-source przeznaczone do zarządzania i wersjonowania zmian w schemacie bazy danych. W projekcie Climatly odgrywa ono kluczową rolę w utrzymaniu spójności struktury bazy danych PostgreSQL na różnych środowiskach.
+Liquibase to narzędzie open-source przeznaczone do zarządzania i wersjonowania zmian w schemacie bazy danych~\cite{bib:liquibase2023}. W projekcie Climatly odgrywa ono kluczową rolę w utrzymaniu spójności struktury bazy danych PostgreSQL na różnych środowiskach.
 
 Omawiane narzędzie używa koncepcji ``changesetów'' - atomowych, ponumerowanych zestawów zmian, które są sekwencyjnie aplikowane do bazy danych. Każdy changeset jest identyfikowany przez unikalne ID oraz autora, co zapewnia pełną kontrolę nad historią zmian i możliwość śledzenia, kto i kiedy wprowadził konkretne modyfikacje. Z początku projektu Liquibase został przeze mnie wykorzystany do zdefiniowania początkowego schematu tabel, który bardziej szczegółowo będzie omówiony w rozdziale 3.
 
@@ -475,7 +470,7 @@ W miarę ewolucji aplikacji, pojawiały się potrzeby modyfikacji struktury bazy
 
 \subsection*{Lombok - generowanie schematycznego kodu}
 
-Lombok to popularna biblioteka Javy, która znacząco usprawnia proces programowania poprzez redukcję powtarzalnego kodu. Java jako język jest często krytykowana za wymaganie dużej ilości tzw. boilerplate code - standardowego, powtarzalnego kodu, który programista musi pisać w wielu miejscach. Dotyczy to szczególnie klas przechowujących dane, gdzie dla każdego pola trzeba często tworzyć gettery, settery, konstruktory, metody equals, hashCode i toString.
+Lombok to popularna biblioteka Javy, która znacząco usprawnia proces programowania poprzez redukcję powtarzalnego kodu~\cite{bib:baeldung2023lombok}. Java jako język jest często krytykowana za wymaganie dużej ilości tzw. boilerplate code - standardowego, powtarzalnego kodu, który programista musi pisać w wielu miejscach. Dotyczy to szczególnie klas przechowujących dane, gdzie dla każdego pola trzeba często tworzyć gettery, settery, konstruktory, metody equals, hashCode i toString.
 
 Wykorzystanie Lomboka szczególnie usprawnia pracę ze Springiem, który dla optymalnego działania wymaga specyficznych konstruktorów i metod dostępowych. To, co normalnie wymagałoby napisania dziesiątek linii kodu, z Lombokiem sprowadza się do dodania jednej adnotacji co dramatycznie zwiększa czytelność i zmniejsza ilość kodu, który musi być utrzymywany.
 
@@ -519,7 +514,7 @@ public class SensorData {
 
 \subsection*{Profile Spring Boot - zarządzanie konfiguracją}
 
-Profile Spring Boot to mechanizm umożliwiający elastyczne dostosowanie konfiguracji aplikacji w zależności od środowiska uruchomieniowego. W projekcie Climatly wykorzystałem profile do oddzielenia konfiguracji środowiska developerskiego od produkcyjnego poprzez zdefiniowanie różnych parametrów połączenia do bazy danych oraz konfigurację poziomów logowania. W środowisku developerskim zastosowałem bardziej szczegółowy poziom logowania, co znacząco ułatwia debugowanie i śledzenie przepływu danych, podczas gdy w środowisku produkcyjnym ograniczyłem logi do najważniejszych komunikatów, co optymalizuje wydajność aplikacji. Oczekiwany profil aktywuje się jako parametr przy uruchamianiu aplikacji z pliku wykonywalnego JAR.
+Profile Spring Boot to mechanizm umożliwiający elastyczne dostosowanie konfiguracji aplikacji w zależności od środowiska uruchomieniowego~\cite{bib:baeldung2023profiles}. W projekcie Climatly wykorzystałem profile do oddzielenia konfiguracji środowiska developerskiego od produkcyjnego poprzez zdefiniowanie różnych parametrów połączenia do bazy danych oraz konfigurację poziomów logowania. W środowisku developerskim zastosowałem bardziej szczegółowy poziom logowania, co znacząco ułatwia debugowanie i śledzenie przepływu danych, podczas gdy w środowisku produkcyjnym ograniczyłem logi do najważniejszych komunikatów, co optymalizuje wydajność aplikacji. Oczekiwany profil aktywuje się jako parametr przy uruchamianiu aplikacji z pliku wykonywalnego JAR.
 
 \begin{lstfloat}[H]
 \begin{lstlisting}[language=yaml]
@@ -541,7 +536,7 @@ logging:
 
 \subsection*{Swagger --- automatyczna dokumentacja API}
 
-Swagger to narzędzie do automatycznego generowania dokumentacji interfejsu API w formacie OpenAPI. W projekcie Climatly zastosowałem integrację ze Swagger, co pozwala nie tylko na łatwą integrację aplikacji klienckiej z backendem, lecz również otwiera furtkę dla zewnętrznych klientów, jasno definiując jakie są dostępne endpointy, jakie są ich wymagania wejściowe oraz oczekiwane formaty odpowiedzi. Dzięki tej dokumentacji, deweloperzy frontendowi otrzymują precyzyjny opis wszystkich dostępnych funkcji API bez konieczności ręcznego tworzenia dokumentacji, która mogłaby się szybko zdezaktualizować.
+Swagger to narzędzie do automatycznego generowania dokumentacji interfejsu API w formacie OpenAPI~\cite{bib:swagger2023}. W projekcie Climatly zastosowałem integrację ze Swagger, co pozwala nie tylko na łatwą integrację aplikacji klienckiej z backendem, lecz również otwiera furtkę dla zewnętrznych klientów, jasno definiując jakie są dostępne endpointy, jakie są ich wymagania wejściowe oraz oczekiwane formaty odpowiedzi. Dzięki tej dokumentacji, deweloperzy frontendowi otrzymują precyzyjny opis wszystkich dostępnych funkcji API bez konieczności ręcznego tworzenia dokumentacji, która mogłaby się szybko zdezaktualizować.
 
 \begin{figure}[H]
     \centering
@@ -557,7 +552,7 @@ Projektując warstwę serwerową systemu Climatly, przyjąłem architekturę mod
 Architektura modularna przynosi kilka istotnych korzyści w kontekście systemu zarządzania danymi pogodowymi. Po pierwsze, umożliwia separację odpowiedzialności — każdy moduł koncentruje się na konkretnym aspekcie działania systemu, co ułatwia zrozumienie kodu i jego utrzymanie. Po drugie, wspiera niezależny rozwój — różne funkcjonalności mogą być rozwijane równolegle bez ryzyka konfliktów. Po trzecie, zwiększa testowalność — każdy moduł może być testowany w izolacji, co upraszcza proces weryfikacji poprawności działania. Wreszcie, ułatwia diagnozowanie problemów — błędy są lokalizowane w obrębie konkretnych modułów, co przyspiesza proces debugowania.
 
 \begin{itemize}[itemsep=3pt,topsep=5pt,parsep=0pt]
-\item \textbf{Separacja odpowiedzialności} --- Każdy moduł koncentruje się na konkretnym aspekcie działania systemu, co ułatwia zrozumienie kodu i jego utrzymanie. Programista pracujący nad modułem Scheduler nie musi znać szczegółów implementacji komunikacji z InfluxDB.
+\item \textbf{Separacja odpowiedzialności} --- Każdy moduł koncentruje się na konkretnym aspekcie działania systemu, co ułatwia zrozumienie kodu i jego utrzymanie. Potencjalny inny programista pracujący nad modułem Scheduler nie musi znać szczegółów implementacji komunikacji z InfluxDB.
 
 \item \textbf{Niezależny rozwój} --- Różne funkcjonalności mogą być rozwijane równolegle bez ryzyka konfliktów. Podczas gdy jeden developer optymalizuje zapytania Flux, inny może skupić się na ulepszaniu mechanizmów SSE.
 
@@ -819,7 +814,7 @@ public class AdminService implements IAdminService {
 
 \chapter{Podsumowanie doświadczeń projektowych}
 
-Proces implementacji warstwy serwerowej Climatly okazał się znacznie bardziej złożony niż pierwotnie zakładaLem, ujawniając zarówno fundamentalne wyzwania implementacyjne, jak i niespodziewane możliwości rozwoju systemu. Dopiero praktyczna realizacja pokazała prawdziwe ograniczenia przyjętych rozwiązań, które niemożliwe były do przewidzenia na etapie projektowania. Jednocześnie praca nad systemem uwidoczniła jego potencjał i możliwe kierunki ewolucji. W tym rozdziale omówie kluczowe problemy implementacyjne wraz z ich rozwiązaniami, przedstawiono perspektywy rozwoju systemu oraz podsumowano osiągnięte rezultaty wraz z  wyciągniętymi wnioskami.
+Proces implementacji warstwy serwerowej Climatly okazał się znacznie bardziej złożony niż pierwotnie zakładałem, ujawniając zarówno fundamentalne wyzwania implementacyjne, jak i niespodziewane możliwości rozwoju systemu. Dopiero praktyczna realizacja pokazała prawdziwe ograniczenia przyjętych rozwiązań, które niemożliwe były do przewidzenia na etapie projektowania. Jednocześnie praca nad systemem uwidoczniła jego potencjał i możliwe kierunki ewolucji. W tym rozdziale omówiono kluczowe problemy implementacyjne wraz z ich rozwiązaniami, przedstawiono perspektywy rozwoju systemu oraz podsumowano osiągnięte rezultaty wraz z  wyciągniętymi wnioskami.
 
 \section{Napotkane wyzwania i zastosowane rozwiązania}
 
@@ -843,7 +838,7 @@ Zastosowane podejście przyniosło znaczące korzyści:
 
 \subsection*{Integracja REST API oraz WebFlux}
 
-Kolejnym istotnym wyzwaniem była implementacja dynamicznego wystawiania danych w czasie rzeczywistym. Początkowo rozważałem zastosowanie Spring WebFlux -- reaktywnej platformy programistycznej, która umożliwia ciągłe przesyłanie danych do klienta w ramach pojedynczego połączenia HTTP.
+Kolejnym istotnym wyzwaniem była implementacja dynamicznego wystawiania danych w czasie rzeczywistym. Początkowo rozważałem zastosowanie Spring WebFlux -- reaktywnej platformy programistycznej, która umożliwia ciągłe przesyłanie danych do klienta w ramach pojedynczego połączenia HTTP~\cite{bib:baeldung2023webflux}.
 
 Jednak w praktyce okazało się, że mieszanie reaktywnej architektury z tradycyjnym podejściem REST API w ramach jednej aplikacji jest problematyczne. Nawet umieszczenie obu rozwiązań w osobnych modułach projektu nie rozwiązało fundamentalnych konfliktów architektonicznych.
 
@@ -859,9 +854,9 @@ W odpowiedzi na te ograniczenia zdecydowałem się na użycie Server-Sent Events
 
 \section{Potencjalne kierunki rozwoju systemu Climatly}
 
-\subsection*{Przejście na architekturę Event-Driven Development}
+\subsection*{Przejście na architekturę Event-Driven Architecture}
 
-Event-Driven Development to paradygmat architektoniczny, w którym przepływ danych i logika aplikacji są napędzane przez zdarzenia - eventy. W tym podejściu komponenty systemu komunikują się poprzez publikowanie i nasłuchiwanie zdarzeń, zamiast bezpośredniego wywoływania funkcji czy metod. Każde zdarzenie reprezentuje zmianę stanu w systemie i może wyzwalać reakcje w innych komponentach, tworząc reaktywny i luźno sprzężony system.
+Event-Driven Architecture to paradygmat architektoniczny, w którym przepływ danych i logika aplikacji są napędzane przez zdarzenia - eventy. W tym podejściu komponenty systemu komunikują się poprzez publikowanie i nasłuchiwanie zdarzeń, zamiast bezpośredniego wywoływania funkcji czy metod. Każde zdarzenie reprezentuje zmianę stanu w systemie i może wyzwalać reakcje w innych komponentach, tworząc reaktywny i luźno sprzężony system~\cite{bib:boringowl2023eda}.
 Obecna architektura systemu opiera się na modelu, w którym backend aktywnie zarządza procesem aktualizacji czujników oraz wymaga wykorzystania dedykowanej bazy szeregów czasowych InfluxDB. Takie podejście wprowadza dodatkową złożoność i punkty potencjalnych awarii.
 Proponowana refaktoryzacja zakłada fundamentalną zmianę paradygmatu - przejście od modelu gdzie backend dba o aktualizację sytuacji, do architektury gdzie nowy odczyt z czujnika rozpoczyna dominę całego przepływu danych w systemie.
 
@@ -874,7 +869,7 @@ Korzyści obejmują eliminację skomplikowanych mechanizmów synchronizacji, red
 
 Drugim istotnym kierunkiem rozwoju jest implementacja systemu autoryzacji, który otworzyłby bramę na szereg funkcjonalności znacząco poprawiających user experience i zachęcających użytkowników do dłuższego korzystania z systemu. Obecny model otwarty, choć prosty w implementacji, ogranicza możliwości tworzenia angażujących doświadczeń użytkownika.
 
-Stworzenie modułu autoryzacji umożliwiłoby wprowadzenie funkcjonalności takich jak:
+Stworzenie modułu autoryzacji umożliwiłoby dodatkowych funkcjonalności:
 \begin{itemize}
    \item Zarządzanie ulubionymi lokalizacjami i czujnikami
    \item System powiadomień o krytycznych zmianach w obserwowanych lokalizacjach
@@ -898,13 +893,11 @@ Opracowana warstwa serwerowa stanowi solidną podstawę projektu, która umożli
 \addcontentsline{toc}{chapter}{Podsumowanie}
 \chaptermark{Podsumowanie}
 
-Niniejsza praca licencjacka przedstawiła proces projektowania i implementacji warswy systemowej projektu Climatly - rozwiązania do monitoringu parametrów środowiskowych w czasie rzeczywistym. Praca obejmowała analizę wymagań, projektowanie architektury systemu, implementację warstwy serwerowej oraz dokumentację napotkanych wyzwań i zastosowanych rozwiązań.
+Niniejsza praca licencjacka przedstawiła proces projektowania i implementacji warswy systemowej projektu Climatly --- rozwiązania do monitoringu parametrów środowiskowych w czasie rzeczywistym. Praca obejmowała analizę wymagań, projektowanie architektury systemu, implementację warstwy serwerowej oraz dokumentację napotkanych wyzwań i zastosowanych rozwiązań.
 
 Proces pisania pracy okazał się równie pouczający co sama implementacja projektu. Konieczność systematycznego dokumentowania decyzji projektowych, analizy alternatywnych rozwiązań oraz refleksji nad napotkanymi problemami znacząco pogłębiła zrozumienie całego procesu tworzenia oprogramowania. Szczególnie wartościowe było łączenie aspektów teoretycznych z praktyczną implementacją oraz konieczność krytycznej oceny własnych rozwiązań.
 
-Powyższa praca potwierdza, że kompleksowe podejście do dokumentacji projektów informatycznych - od analizy wymagań przez implementację aż po wnioski końcowe - stanowi istotny element procesu edukacyjnego, umożliwiający nie tylko realizację konkretnego rozwiązania, ale również rozwój umiejętności inżynierskich oraz zdolności do refleksji nad własnymi decyzjami technicznymi.
-
-
+Powyższa praca potwierdza, że kompleksowe podejście do dokumentacji projektów informatycznych --- od analizy wymagań przez implementację aż po wnioski końcowe --- stanowi istotny element procesu edukacyjnego, umożliwiający nie tylko realizację konkretnego rozwiązania, ale również rozwój umiejętności inżynierskich oraz zdolności do refleksji nad własnymi decyzjami technicznymi.
 \listof{lstfloat}{Spis listingów} % jeśli są tabele
 \addcontentsline{toc}{chapter}{Spis listingów}
 
@@ -914,12 +907,26 @@ Powyższa praca potwierdza, że kompleksowe podejście do dokumentacji projektó
 \begin{thebibliography}{99}
 \addcontentsline{toc}{chapter}{Bibliografia}
 \bibitem{bib:vaadin2023} Vaadin, \textit{State of Java in the Enterprise Report}, 2023, \url{https://vaadin.com/blog/2023-trends-for-java-in-the-enterprise}, [dostęp: 05.05.2025].
-\bibitem{bib:oracle2023} Oracle, \textit{Java Documentation - Get Started}, 2023, \url{https://docs.oracle.com/en/java/}, [dostęp: 05.05.2025].
+\bibitem{bib:geeksforgeeks2023oop} GeeksforGeeks, \textit{Object Oriented Programming in Java}, 2023, \url{https://www.geeksforgeeks.org/object-oriented-programming-oops-concept-in-java/}, [dostęp: 05.05.2025].
+\bibitem{bib:geeksforgeeks2023wora} GeeksforGeeks, \textit{Java - Write Once and Run Anywhere}, 2023, \url{https://www.geeksforgeeks.org/java/why-is-java-write-once-and-run-anywhere/}, [dostęp: 05.05.2025].
+\bibitem{bib:oracle2023virtual} Oracle, \textit{Virtual Threads in Java 21}, 2023, \url{https://docs.oracle.com/en/java/javase/21/core/virtual-threads.html}, [dostęp: 05.05.2025].
+\bibitem{bib:oracle2023gc} Oracle, \textit{Java Garbage Collection Basics}, 2023, \url{https://www.oracle.com/webfolder/technetwork/tutorials/obe/java/gc01/index.html}, [dostęp: 05.05.2025].
+\bibitem{bib:boringowl2023jvm} BoringOwl, \textit{Czym jest Java Virtual Machine}, 2023, \url{https://boringowl.io/blog/czym-jest-java-virtual-machine}, [dostęp: 05.05.2025].
+\bibitem{bib:oracle2023lts} Oracle, \textit{Java SE Support Roadmap}, 2023, \url{https://www.oracle.com/java/technologies/java-se-support-roadmap.html}, [dostęp: 05.05.2025].
 \bibitem{bib:snyk2020} Snyk, \textit{Spring dominates the Java ecosystem with 60\% using it for their main applications}, 2020, \url{https://snyk.io/blog/spring-dominates-the-java-ecosystem-with-60-using-it-for-their-main-applications/}, [dostęp: 16.06.2025].
-\bibitem{bib:guvi2023} GUVI, \textit{What is Platform Independence – Java \& .net – "write once, run anywhere"}, 2023, \url{https://www.guvi.in/blogs/what-is-platform-independence-java-net-write-once-run-anywhere/}, [dostęp: 05.05.2025].
-\bibitem{bib:fielding2000} Roy T. Fielding, \textit{Architectural Styles and the Design of Network-based Software Architectures}, 2000, \url{https://ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm}, [dostęp: 05.05.2025].
-\bibitem{bib:htmx2023} Carson Gross, \textit{REST - Explained For Beginners}, 2023, \url{https://htmx.org/essays/rest-explained/}, [dostęp: 05.05.2025].
 \bibitem{bib:ibm2024} IBM, \textit{What Is a REST API (RESTful API)?}, 2024, \url{https://www.ibm.com/think/topics/rest-apis}, [dostęp: 05.05.2025].
+\bibitem{bib:baeldung2023rest} Baeldung, \textit{Building a REST API with Spring and Java}, 2023, \url{https://www.baeldung.com/building-a-restful-web-service-with-spring-and-java-based-configuration}, [dostęp: 05.05.2025].
+\bibitem{bib:baeldung2023mvc} Baeldung, \textit{Spring MVC Tutorial}, 2023, \url{https://www.baeldung.com/spring-mvc-tutorial}, [dostęp: 05.05.2025].
+\bibitem{bib:baeldung2023ioc} Baeldung, \textit{Inversion of Control and Dependency Injection in Spring}, 2023, \url{https://www.baeldung.com/inversion-control-and-dependency-injection-in-spring}, [dostęp: 05.05.2025].
+\bibitem{bib:aws2023postgresql} Amazon Web Services, \textit{What is PostgreSQL}, 2023, \url{https://aws.amazon.com/rds/postgresql/what-is-postgresql/}, [dostęp: 05.05.2025].
+\bibitem{bib:influxdb2023} InfluxData, \textit{InfluxDB Overview}, 2023, \url{https://www.influxdata.com/products/influxdb-overview/}, [dostęp: 05.05.2025].
+\bibitem{bib:liquibase2023} Liquibase, \textit{How Liquibase Works}, 2023, \url{https://www.liquibase.com/how-liquibase-works}, [dostęp: 05.05.2025].
+\bibitem{bib:baeldung2023lombok} Baeldung, \textit{Introduction to Project Lombok}, 2023, \url{https://www.baeldung.com/intro-to-project-lombok}, [dostęp: 05.05.2025].
+\bibitem{bib:docker2023} Docker, \textit{Docker Overview}, 2023, \url{https://docs.docker.com/get-started/docker-overview/}, [dostęp: 05.05.2025].
+\bibitem{bib:baeldung2023profiles} Baeldung, \textit{Spring Profiles}, 2023, \url{https://www.baeldung.com/spring-profiles}, [dostęp: 05.05.2025].
+\bibitem{bib:swagger2023} Swagger, \textit{What is Swagger}, 2023, \url{https://swagger.io}, [dostęp: 05.05.2025].
+\bibitem{bib:baeldung2023webflux} Baeldung, \textit{Spring WebFlux}, 2023, \url{https://www.baeldung.com/spring-webflux}, [dostęp: 05.05.2025].
+\bibitem{bib:boringowl2023eda} BoringOwl, \textit{Architektura sterowana zdarzeniami - sekret skalowalności i elastyczności współczesnych systemów}, 2023, \url{https://boringowl.io/blog/architektura-sterowana-zdarzeniami-sekret-skalowalnosci-i-elastycznosci-wspolczesnych-systemow}, [dostęp: 05.05.2025].
 \end{thebibliography}
 
 

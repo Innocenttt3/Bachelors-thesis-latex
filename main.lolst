@@ -1,10 +1,10 @@
 \contentsline {lstfloat}{\numberline {2.1}{\ignorespaces Przykład kontrolera w architekturze MVC}}{15}{lstfloat.2.1}%
 \contentsline {lstfloat}{\numberline {2.2}{\ignorespaces Przykład Dependency Injection w Spring Boot}}{16}{lstfloat.2.2}%
 \contentsline {lstfloat}{\numberline {2.3}{\ignorespaces Fragment pliku \texttt {docker-compose.yaml} definiującego lokalne środowisko developerskie}}{20}{lstfloat.2.3}%
-\contentsline {lstfloat}{\numberline {2.4}{\ignorespaces Fragment pliku inicjalizującego schemat bazy danych}}{22}{lstfloat.2.4}%
-\contentsline {lstfloat}{\numberline {2.5}{\ignorespaces Przykład modyfikacji struktury bazy danych}}{23}{lstfloat.2.5}%
-\contentsline {lstfloat}{\numberline {2.6}{\ignorespaces Fragment klasy encji Sensor z adnotacjami Lombok}}{24}{lstfloat.2.6}%
-\contentsline {lstfloat}{\numberline {2.7}{\ignorespaces Fragment konfiguracji dla profilu lokalnego}}{25}{lstfloat.2.7}%
-\contentsline {lstfloat}{\numberline {3.1}{\ignorespaces Encja Sensor --- centralna klasa modułu}}{29}{lstfloat.3.1}%
-\contentsline {lstfloat}{\numberline {3.2}{\ignorespaces Metoda generująca zapytania Flux w module Influx}}{30}{lstfloat.3.2}%
-\contentsline {lstfloat}{\numberline {3.3}{\ignorespaces Fragment kontrolera SSE obsługujący strumieniowanie wszystkich czujników}}{31}{lstfloat.3.3}%
+\contentsline {lstfloat}{\numberline {2.4}{\ignorespaces Fragment pliku inicjalizującego schemat bazy danych}}{21}{lstfloat.2.4}%
+\contentsline {lstfloat}{\numberline {2.5}{\ignorespaces Przykład modyfikacji struktury bazy danych}}{22}{lstfloat.2.5}%
+\contentsline {lstfloat}{\numberline {2.6}{\ignorespaces Fragment klasy encji Sensor z adnotacjami Lombok}}{23}{lstfloat.2.6}%
+\contentsline {lstfloat}{\numberline {2.7}{\ignorespaces Fragment konfiguracji dla profilu lokalnego}}{24}{lstfloat.2.7}%
+\contentsline {lstfloat}{\numberline {3.1}{\ignorespaces Encja Sensor --- centralna klasa modułu}}{28}{lstfloat.3.1}%
+\contentsline {lstfloat}{\numberline {3.2}{\ignorespaces Metoda generująca zapytania Flux w module Influx}}{29}{lstfloat.3.2}%
+\contentsline {lstfloat}{\numberline {3.3}{\ignorespaces Fragment kontrolera SSE obsługujący strumieniowanie wszystkich czujników}}{30}{lstfloat.3.3}%
